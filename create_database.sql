@@ -1,7 +1,6 @@
-CREATE DATABASE IF NOT EXISTS waterfall_db;
+DROP DATABASE IF EXISTS waterfall_db;
+CREATE DATABASE waterfall_db;
 USE waterfall_db;
-
-DROP TABLE IF EXISTS usuario;
 
 CREATE TABLE usuario(
   login varchar(50) NOT NULL,
@@ -11,14 +10,10 @@ CREATE TABLE usuario(
   PRIMARY KEY(login)
 );
 
-DROP TABLE IF EXISTS produto;
-
 CREATE TABLE produto(
   id_produto int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY(id_produto)
 );
-
-DROP TABLE IF EXISTS avaliacao;
 
 CREATE TABLE avaliacao(
   login_usuario varchar(50) NOT NULL,
