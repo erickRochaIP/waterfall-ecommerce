@@ -5,6 +5,7 @@ Aplicação PHP para um e-commerce
 [Ana Luísa Reis Ribeiro](https://github.com/AnaLuisaReiis),
 [André](https://github.com/andrehccordeiro),
 [Erick Figueirôa Rocha](https://github.com/erickRochaIP),
+[Gisele Núbia Santos Oliveira] (https://github.com/gihNubia)
 
 ## Preparando o ambiente
 
