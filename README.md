@@ -26,6 +26,9 @@ $ cd waterfall-ecommerce
 # Crie o banco de dados (Você vai precisar criar um usuário primeiro)
 $ mysql -u 'nome_de_usuario' -p < create_database.sql
 $ mysql -P 3307 -u root (caso o de cima não funcione)
+
+# Popule o banco de dados
+$ mysql -u 'nome_de_usuario' -p < seeds.sql
 ```
 
 Com o repositório clonado no diretório raíz e o banco de dados criado, agora só precisamos deixar essas informações disponíveis para o PHP. No diretório do repositório, crie o arquivo database_connection.php no seguinte formato:
