@@ -24,12 +24,12 @@ $ git clone https://github.com/erickRochaIP/waterfall-ecommerce.git
 $ cd waterfall-ecommerce
 
 # Crie o banco de dados (Você vai precisar criar um usuário primeiro)
-$ mysql -u 'nome_de_usuario' -p < create_database.sql
-$ mysql -P 3307 -u root (caso o de cima não funcione)
+$ mysql -P 'porta' -u 'nome_de_usuario' -p < create_database.sql
 
 # Popule o banco de dados
-$ mysql -u 'nome_de_usuario' -p < seeds.sql
+$ mysql -P 'porta' -u 'nome_de_usuario' -p < seeds.sql
 ```
+Em que nome_de_usuario é o nome do usuário usado, e porta é a porta do MySQL.
 
 Com o repositório clonado no diretório raíz e o banco de dados criado, agora só precisamos deixar essas informações disponíveis para o PHP. No diretório do repositório, crie o arquivo database_connection.php no seguinte formato:
 ```
@@ -38,6 +38,7 @@ Com o repositório clonado no diretório raíz e o banco de dados criado, agora 
 class Database{
    private $driver;
    private $host;
+   private $port;
    private $dbname;
    private $username;
    private $password;
@@ -46,6 +47,7 @@ class Database{
    function __construct(){
         $this->driver = "mysql";
         $this->host = "localhost";
+        $this->port = "porta";
         $this->dbname = "waterfall_db";
         $this->username = "nome_de_usuario";
         $this->password = "senha_de_usuario";
@@ -57,7 +59,7 @@ class Database{
 
    function getConnection(){
         $this->connect = new PDO(
-            "$this->driver:host=$this->host;dbname=$this->dbname",
+            "$this->driver:host=$this->host;port=$this->port;dbname=$this->dbname",
             $this->username,
             $this->password
         );
