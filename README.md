@@ -70,6 +70,6 @@ class Database{
 
 ?>
 ```
-Em que nome_de_usuario é o nome do usuário usado, e senha_de_usuario é a senha deste mesmo usuário.
+Em que nome_de_usuario é o nome do usuário usado, senha_de_usuario é a senha deste mesmo usuário, e porta é a porta do MySQL.
 
 Para testar se está tudo funcionando, abra o navegador e pesquise por: http://localhost/waterfall-ecommerce/test_connection.php
