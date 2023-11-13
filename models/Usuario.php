@@ -61,8 +61,8 @@ class UsuarioRepository {
 		}
 
 		$usuario = new Usuario();
-		$usuario->setLogin($row['LOGIN']);
-		$usuario->setNome($row['NOME']);
+		#$usuario->setLogin($row['LOGIN']);
+		#$usuario->setNome($row['NOME']);
 
 		return $usuario;
 	}
