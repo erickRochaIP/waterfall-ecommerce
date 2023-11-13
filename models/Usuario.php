@@ -59,6 +59,12 @@ class UsuarioRepository {
 		if($stmt->rowCount() != 1){
 			throw new Exception('USUARIO NA ENCONTRADO');
 		}
+
+		$usuario = new Usuario();
+		$usuario->setLogin($row['LOGIN']);
+		$usuario->setNome($row['NOME']);
+
+		return $usuario;
 	}
 
 }

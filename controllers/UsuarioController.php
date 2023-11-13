@@ -10,12 +10,14 @@ class UsuarioController {
 		require_once __DIR__ .'/../views/usuario/index.php';
 	}
 
-	public function login($post){
+	public function authenticate($post){
 		$usuarioRepo = new UsuarioRepository();
 		try{
 			$_REQUEST['usuario'] = $usuarioRepo->get_usuario($post['login'], $post['senha']);
+			echo "Login realizado com sucesso";	// TODO: chamar a view adequada
 		}
 		catch(Exception $e){
+			echo $e->getMessage();	// TODO: tratar erro de autenticacao
 			require_once __DIR__ .'/../views/usuario/login.php';
 		}
 
