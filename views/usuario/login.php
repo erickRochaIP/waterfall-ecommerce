@@ -17,9 +17,9 @@
         }
     </style>
 </head>
-
-<form action="index.php" method="post">
-    <div align="center" class="centro">
+<div align="center" class="centro">
+    <form action="index.php" method="post">
+    
         <p align="center">
             <label for="login">Usuário:</label>
             <input type="text" name="login">
@@ -28,16 +28,24 @@
             <label for="password">Senha:</label>
             <input type="password" name="senha">
         </p>
-
+        
         <p align="center">
             <button> login </button>
-            <button> sign up </button>
         </p>
-    </div>
+    
+    
      
-    <input type="hidden" name="class" value="Usuario"/> 
-    <input type="hidden" name="action" value="authenticate"/>
+        <input type="hidden" name="class" value="Usuario"/> 
+        <input type="hidden" name="action" value="authenticate"/>
     
-    
+    </form>
 
-</form>
+    <form action="index.php" method="post">
+    <p align="center">
+            <button> sign up </button>
+
+            <input type="hidden" name="class" value="Usuario"/> 
+            <input type="hidden" name="action" value="openSignUp"/>
+        </p>
+    </form>
+</div>

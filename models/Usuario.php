@@ -67,6 +67,26 @@ class UsuarioRepository {
 		return $usuario;
 	}
 
+	public function create_usuario($login, $senha, $nome){
+		$sql = 'INSERT INTO USUARIO(LOGIN, SENHA, NOME, ADMIN)
+		VALUES(?,?,?,0)';
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$stmt->execute([$login, $senha, $nome]);
+
+		return $this->get_usuario($login, $senha);
+	}
+
+	public function check_login_usuario($login){
+		$sql = 'SELECT LOGIN FROM USUARIO WHERE LOGIN= :login';
+		$stmt = $this->conec->prepare($sql);
+		$stmt->bindValue(':login', $login);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$stmt->execute();
+
+		return ($stmt->rowCount() != 0);
+	}
+
 }
 
 ?>
