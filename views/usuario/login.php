@@ -1,36 +1,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #48D1CC;
-        }
-
-        .centro {
-            width: 200px; /* ou o tamanho desejado */
-            height: 200px; /* ou o tamanho desejado */
-            background-color: #F0F8FF;
-        }
-        .imagem-no-canto {
-            position: absolute;
-            bottom: 250;
-            right: 590;
-            width: 50px; /* ou o tamanho desejado */
-            height: 50px; /* ou o tamanho desejado */
-        }
     </style>
 </head>
+     <body>
+        <h1>Waterfall e-commerce</h1>
+        <img src="pictures/waterfall.png" alt="Icon waterfall" class="imagem-no-canto">
+    </body>
 <div align="center" class="centro">
-    <img src="pictures/waterfall.png" alt="Icon waterfall" class="imagem-no-canto">
     <form action="index.php" method="post">
     
         <p align="center">
