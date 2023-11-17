@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ .'/../models/Usuario.php';
-
+require_once __DIR__ .'/../controllers/ProdutoController.php';
 class UsuarioController {
 	public function get_all_usuarios($post){
 
@@ -15,6 +15,10 @@ class UsuarioController {
 		try{
 			$_REQUEST['usuario'] = $usuarioRepo->get_usuario($post['login'], $post['senha']);
 			echo "Login realizado com sucesso";	// TODO: chamar a view adequada
+			
+			$produto = new ProdutoController();
+			$produto->get_all_produtos($post);
+
 		}
 		catch(Exception $e){
 			echo $e->getMessage();	// TODO: tratar erro de autenticacao

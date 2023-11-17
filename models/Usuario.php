@@ -26,7 +26,7 @@ class UsuarioRepository {
     private $conec;
 
     public function __construct(){
-        require __DIR__.'/../database_connection.php';
+        require_once __DIR__.'/../database_connection.php';
         $this->conec = (new Database())->getConnection();
     }
 
