@@ -17,7 +17,23 @@
             <?php endforeach; ?>
             </table>
         <?php endif; ?>
-        <button> adicionar no carrinho </button>
+        
+
+        <select>
+            <option value="Select">0</option>
+            <option value="Select">1</option>
+            <option value="Select">2</option>
+            <option value="Select">3</option>
+            <option value="Select">4</option>
+            <option value="Select">5</option>
+            <option value="Select">6</option>
+            <option value="Select">7</option>
+            <option value="Select">8</option>
+            <option value="Select">9</option>
+            <option value="Select">10</option>
+        </select>
+        
+        <button> adicionar ao carrinho </button>
     
     </div>
     <?php endforeach; ?>
