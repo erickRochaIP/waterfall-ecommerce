@@ -6,7 +6,11 @@ class Produto {
     private $nome_categoria;
     private $descricao;
     private $preco;
-    private $informacao;
+    private $informacoes;
+
+    public function __construct(){
+        $this->informacoes = array();
+    }
 
     
     public function get_idproduto() {
@@ -28,11 +32,11 @@ class Produto {
         return $this->preco;
     }
 
-    public function informacao(){
-        return $this->informacao;
+    public function get_informacoes(){
+        return $this->informacoes;
     }
 
-    public function set_idproduto($id_produto){
+    public function set_id_produto($id_produto){
         $this->id_produto = $id_produto;
     }
 
@@ -52,8 +56,33 @@ class Produto {
         $this->preco = $preco;
     }
 
-    public function set_informacao($informacao){
-        $this->informacao = $informacao;
+    public function add_informacao($informacao){
+        $this->informacoes[] = $informacao;
+    }
+
+    public function possui_informacoes(){
+        return !(empty($this->informacoes));
+    }
+}
+
+class Informacao {
+	private $titulo;
+    private $corpo;
+
+    public function get_titulo(){
+        return $this->titulo;
+    }
+
+    public function get_corpo(){
+        return $this->corpo;
+    }
+
+    public function set_titulo($titulo){
+        $this->titulo = $titulo;
+    }
+
+    public function set_corpo($corpo){
+        $this->corpo = $corpo;
     }
 }
 
@@ -68,30 +97,40 @@ class ProdutoRepository {
 
 	public function get_all_produtos(){
 		$sql = 'SELECT PRODUTO.ID_PRODUTO, PRODUTO.NOME, PRODUTO.DESCRICAO, PRODUTO.PRECO, 
-        PRODUTO.NOME_CATEGORIA
-         FROM PRODUTO';
+        PRODUTO.NOME_CATEGORIA, INFORMACAO.TITULO, INFORMACAO.CORPO
+         FROM PRODUTO JOIN INFORMACAO ON INFORMACAO.ID_PRODUTO = PRODUTO.ID_PRODUTO';
 		$stmt = $this->conec->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_ASSOC);
 		$stmt->execute();
 
-		$produtos = array();
-		while ($row = $stmt->fetch()){
-            
-			$produto = new Produto();
-			$produto->set_idproduto($row['ID_PRODUTO']);
-			$produto->set_nome($row['NOME']);
-            $produto->set_descricao($row['DESCRICAO']);
-            $produto->set_preco($row['PRECO']);
-            $produto->set_nome_categoria($row['NOME_CATEGORIA']);
-            #$produto->setnformacao($row['I.TITULO', $row['CORPO']]);
+        $id_produto = -1;
 
-			$produtos[] = $produto;
+		$produtos = array();
+        $informacoes = array();
+		while ($row = $stmt->fetch()){
+            if ($row['ID_PRODUTO'] != $id_produto){
+                $id_produto = $row['ID_PRODUTO'];
+
+                $produto = new Produto();
+            
+                $produto->set_id_produto($row['ID_PRODUTO']);
+                $produto->set_nome($row['NOME']);
+                $produto->set_descricao($row['DESCRICAO']);
+                $produto->set_preco($row['PRECO']);
+                $produto->set_nome_categoria($row['NOME_CATEGORIA']);
+
+                $produtos[] = $produto;
+            }
+            $informacao = new Informacao();
+            
+            $informacao->set_titulo($row['TITULO']);
+            $informacao->set_corpo($row['CORPO']);
+
+            $produto->add_informacao($informacao);
 		}
 
 		return $produtos;
 	}
-    
-
 }
 
 ?>
