@@ -29,21 +29,25 @@
             </li>
 
             <li><a href="">Categories</a></li>
+
             <li>
-                <form action="index.php" method="post">
-                <a href="" onclick="this.closest('form').submit();return false.">Login </a>
-                  <input type="hidden" name="class" value="login"/> 
+            <form action="index.php" method="post">
+                <a href="" onclick="this.closest('form').submit();return false;">Login </a>
+
+                <input type="hidden" name="class" value="Usuario"/>
+                <input type="hidden" name="action" value="openLogin"/>
             </form>
-            </li>
             </li>
 
             <li>
-                <form action="index.php" method="post">
-                <a href="" onclick="this.closest('form').submit();return false.">Sign Up </a>
+            <form action="index.php" method="post">
+                <a href="" onclick="this.closest('form').submit();return false;">Sign Up </a>
+
                 <input type="hidden" name="class" value="Usuario"/> 
                 <input type="hidden" name="action" value="openSignUp"/>
             </form>
             </li>
+
             <li><a href="">About</a></li>
             
         </ul>
@@ -60,10 +64,7 @@ if(isset($_POST['class']) && isset($_POST['action'])){
     $controller = new $class();
     $controller->$action($_POST);
 } else   {
-    if (isset($_POST['class']) && $_POST['class'] === 'login') {
-        $class = $_POST['class'];
-        require_once __DIR__.'/views/usuario/login.php';
-    }
+    require_once __DIR__.'/views/usuario/login.php';
 }
 
 ?>

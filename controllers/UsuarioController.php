@@ -17,6 +17,10 @@ class UsuarioController extends Controller{
 		}
 	}
 
+	public function openLogin($post){
+		$this->load_view('usuario/login.php');
+	}
+
 	public function openSignUp($post){
 		$this->load_view('usuario/signUp.php');
 	}
