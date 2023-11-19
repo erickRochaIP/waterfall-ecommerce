@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ .'/../models/Repository.php';
 
 class Produto {
 	private $id_produto;
@@ -86,14 +87,7 @@ class Informacao {
     }
 }
 
-class ProdutoRepository {
-
-    private $conec;
-
-    public function __construct(){
-        require_once __DIR__.'/../database_connection.php';
-        $this->conec = (new Database())->getConnection();
-    }
+class ProdutoRepository extends Repository{
 
 	public function get_all_produtos(){
 		$sql = 'SELECT PRODUTO.ID_PRODUTO, PRODUTO.NOME, PRODUTO.DESCRICAO, PRODUTO.PRECO, 

@@ -8,9 +8,8 @@ class UsuarioController extends Controller{
 		try{
 			$usuarioRepo = new UsuarioRepository();
 			$_REQUEST['usuario'] = $usuarioRepo->get_usuario($post['login'], $post['senha']);
-			$this->show_success("Login realizado com sucesso");
-			$this->load_controller('ProdutoController', 'get_all_produtos', $post);
 
+			$this->load_controller('ProdutoController', 'get_all_produtos', $post);
 		}
 		catch(Exception $e){
 			$this->show_error($e->getMessage());
@@ -33,6 +32,7 @@ class UsuarioController extends Controller{
 			$usuarioRepo = new UsuarioRepository();
 			$usuario = $usuarioRepo->create_usuario($post['login'], 
 				$post['senha'], $post['nome']);
+				
 			$this->show_success('Usuario cadastrado com sucesso');
 			$this->load_view('usuario/login.php');
 		}

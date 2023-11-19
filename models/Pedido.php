@@ -1,16 +1,9 @@
 <?php
+require_once __DIR__ .'/../models/Repository.php';
 
 
 
-
-class PedidoRepository(){
-    private $conec;
-
-    public function __construct(){
-        require_once __DIR__.'/../database_connection.php';
-        $this->conec = (new Database())->getConnection();
-    }
-
+class PedidoRepository extends Repository{
     public function get_carrinho($login){
 
 

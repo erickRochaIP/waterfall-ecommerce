@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ .'/../models/Repository.php';
 
 class Usuario {
 	private $login;
@@ -21,14 +22,7 @@ class Usuario {
 	}
 }
 
-class UsuarioRepository {
-
-    private $conec;
-
-    public function __construct(){
-        require_once __DIR__.'/../database_connection.php';
-        $this->conec = (new Database())->getConnection();
-    }
+class UsuarioRepository extends Repository{
 
 	public function get_all_usuarios(){
 		$sql = 'SELECT LOGIN, NOME FROM USUARIO';
@@ -92,7 +86,6 @@ class UsuarioRepository {
 
 		return ($stmt->rowCount() != 0);
 	}
-
 }
 
 ?>
