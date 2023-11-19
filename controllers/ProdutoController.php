@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ .'/../controllers/Controller.php';
 require_once __DIR__ .'/../models/Produto.php';
 
-class ProdutoController {
+class ProdutoController extends Controller{
 
 
 	public function get_all_produtos($post){
@@ -9,7 +10,7 @@ class ProdutoController {
 		$produtoRepo = new ProdutoRepository();
 		$_REQUEST['produtos'] = $produtoRepo->get_all_produtos();
 
-		require_once __DIR__ .'/../views/produto/entry.php';
+		$this->load_view('produto/entry.php');
 	}
 }
 ?>

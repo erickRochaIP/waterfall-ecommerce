@@ -16,7 +16,6 @@ class UsuarioController extends Controller{
 			$this->show_error($e->getMessage());
 			$this->load_view('usuario/login.php');
 		}
-
 	}
 
 	public function openSignUp($post){
