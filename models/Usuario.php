@@ -60,9 +60,11 @@ class UsuarioRepository {
 			throw new Exception('USUARIO NA ENCONTRADO');
 		}
 
+		$row = $stmt->fetch();
+
 		$usuario = new Usuario();
-		#$usuario->setLogin($row['LOGIN']);
-		#$usuario->setNome($row['NOME']);
+		$usuario->setLogin($row['LOGIN']);
+		$usuario->setNome($row['NOME']);
 
 		return $usuario;
 	}
@@ -72,7 +74,11 @@ class UsuarioRepository {
 		VALUES(?,?,?,0)';
 		$stmt = $this->conec->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_ASSOC);
-		$stmt->execute([$login, $senha, $nome]);
+		$funcionou = $stmt->execute([$login, $senha, $nome]);
+
+		if (!$funcionou){
+			throw new Exception("Erro ao cadastrar usuario");
+		}
 
 		return $this->get_usuario($login, $senha);
 	}

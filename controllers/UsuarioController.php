@@ -1,62 +1,47 @@
 <?php
+require_once __DIR__ .'/../controllers/Controller.php';
 require_once __DIR__ .'/../models/Usuario.php';
-require_once __DIR__ .'/../controllers/ProdutoController.php';
-class UsuarioController {
-	public function get_all_usuarios($post){
 
-		$usuarioRepo = new UsuarioRepository();
-		$_REQUEST['usuarios'] = $usuarioRepo->get_all_usuarios();
-
-		require_once __DIR__ .'/../views/usuario/index.php';
-	}
+class UsuarioController extends Controller{
 
 	public function authenticate($post){
-		$usuarioRepo = new UsuarioRepository();
 		try{
+			$usuarioRepo = new UsuarioRepository();
 			$_REQUEST['usuario'] = $usuarioRepo->get_usuario($post['login'], $post['senha']);
-			echo "Login realizado com sucesso";	// TODO: chamar a view adequada
-			
-			$produto = new ProdutoController();
-			$produto->get_all_produtos($post);
+			$this->show_success("Login realizado com sucesso");
+			$this->load_controller('ProdutoController', 'get_all_produtos', $post);
 
 		}
 		catch(Exception $e){
-			echo $e->getMessage();	// TODO: tratar erro de autenticacao
-			require_once __DIR__ .'/../views/usuario/login.php';
+			$this->show_error($e->getMessage());
+			$this->load_view('usuario/login.php');
 		}
 
 	}
 
 	public function openSignUp($post){
-		require_once __DIR__ .'/../views/usuario/signUp.php';
+		$this->load_view('usuario/signUp.php');
 	}
 
 	public function authenticateSignUp($post){
-		$usuarioRepo = new UsuarioRepository();
-		//não obter nenhum login ja cadastrado
-		$exists = $usuarioRepo->check_login_usuario($post['login']);
-		//a senha do campo nova senha e confirma devem ser iguais 
-		if($exists){
-			require_once __DIR__ .'/../views/usuario/signUp.php';
-			
+		if($post['senha'] != $post['senha_confirma']){
+			$this->show_error('Os dois campos de Senha devem ser iguais');
+			$this->load_view('usuario/signUp.php');
+			return;
 		}
-		//se for verdadeiro, novo usuario e cadastrado	
-		else if($post['senha'] == $post['senha_confirma']){
+
+		try{
+			$usuarioRepo = new UsuarioRepository();
 			$usuario = $usuarioRepo->create_usuario($post['login'], 
 				$post['senha'], $post['nome']);
-
-			if($usuario != null){
-				echo 'cadastrado com sucesso';
-			}
-				//testar se é admin ou não
-				// se nao for adminentrar na tela principal de compras
-				//se for admin entrar na tela de admin
-
+			$this->show_success('Usuario cadastrado com sucesso');
+			$this->load_view('usuario/login.php');
 		}
-		else{
-			require_once __DIR__ .'/../views/usuario/signUp.php';
+		catch(Exception $e){
+			$this->show_error($e->getMessage());
+			$this->load_view('usuario/signUp.php');
+			return;
 		}
-
 	}
 }
 ?>
