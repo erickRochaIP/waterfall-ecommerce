@@ -7,47 +7,22 @@
 <style>
     
 </style>
-     <body>
-        <h1>Waterfall e-commerce</h1>
-        <nav class="navbar">
-        <ul>
-            <img src="pictures/waterfall.png" alt="Icon waterfall" class="imagem-no-canto">
-            <li><a href="">Home</a></li>
-
-            <!-- Cada link deve ser colocado dentro de um form -->
-            <li>
-            <form action="index.php" method="post">
-                <!-- Esse atributo "onclick" faz com que o formulario seja enviado ao clicar -->
-                <a href="" onclick="this.closest('form').submit();return false;">Products</a>
-
-                <!-- Sempre identificar a controller e a acao -->
-                <input type="hidden" name="class" value="Produto"/> 
-                <input type="hidden" name="action" value="get_all_produtos"/>
-            </form>
-            </li>
-
-            <li><a href="">Categories</a></li>
-            <li><a href="">About</a></li>
-            
-        </ul>
-    </nav>
-        
-        
-<div align="center" class="centro">
-    <form action="index.php" method="post">
+     <body>  
+    <div align="center" class="centro">
+        <form action="index.php" method="post">
     
-        <p align="center">
+            <p align="center">
             <label for="login">Usuário:</label>
             <input type="text" name="login">
-        </p>
-        <p align="center">
+            </p>
+            <p align="center">
             <label for="password">Senha:</label>
             <input type="password" name="senha">
-        </p>
+            </p>
         
-        <p align="center">
+            <p align="center">
             <button> login </button>
-        </p>
+             </p>
     
     
      
