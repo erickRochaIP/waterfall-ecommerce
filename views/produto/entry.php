@@ -1,3 +1,22 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+    </style>
+<body>
+   <h1>
+Waterfall e-commerce
+   </h1>
+   <nav class="navbar">
+     <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">Products</a></li>
+        <li><a href="">Categories</a></li>
+     </ul>
+   </nav>
+</body>
 <table>
     <?php foreach ($_REQUEST['produtos'] as $produto): ?>
     <div>
