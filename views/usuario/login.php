@@ -26,7 +26,7 @@
     
     
      
-        <input type="hidden" name="class" value="Usuario"/> 
+        <input type="hidden" name="class" value="Session"/> 
         <input type="hidden" name="action" value="authenticate"/>
     
     </form>

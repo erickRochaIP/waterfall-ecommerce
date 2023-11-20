@@ -1,4 +1,21 @@
+<?php 
+
+session_start();
+if(isset($_POST['class']) && isset($_POST['action'])){
+    $class = $_POST['class'].'Controller';
+    $action = $_POST['action'];
+
+    if (strcmp($class, 'SessionController') === 0){
+        require_once __DIR__ .'/controllers/'.$class.'.php';
+
+        $controller = new $class();
+        $controller->$action($_POST);
+    }
+} 
+?>
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -49,20 +66,39 @@
             </li>
 
             <li><a href="">About</a></li>
+
+            <li>
+            <form action="index.php" method="post">
+                <a href="" onclick="this.closest('form').submit();return false;">Logout</a>
+
+                <input type="hidden" name="class" value="Session"/> 
+                <input type="hidden" name="action" value="logout"/>
+            </form>
+            </li>
+            <?php if (isset($_SESSION['usuario'])): ?>
+                <li>
+                <?php echo $_SESSION['usuario'][1] ?>
+                </li>
+            <?php endif; ?>
             
         </ul>
     </nav>
 </body>
 </html>
 <?php 
+// if(isset($_SESSION['usuario'])){
+//     echo $_SESSION['usuario'][1];
+// }
 if(isset($_POST['class']) && isset($_POST['action'])){
     $class = $_POST['class'].'Controller';
     $action = $_POST['action'];
 
-    require_once __DIR__ .'/controllers/'.$class.'.php';
+    if (strcmp($class, 'SessionController') !== 0){
+        require_once __DIR__ .'/controllers/'.$class.'.php';
 
-    $controller = new $class();
-    $controller->$action($_POST);
+        $controller = new $class();
+        $controller->$action($_POST);
+    }
 } else   {
     require_once __DIR__.'/views/usuario/login.php';
 }

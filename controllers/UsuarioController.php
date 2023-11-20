@@ -4,18 +4,6 @@ require_once __DIR__ .'/../models/Usuario.php';
 
 class UsuarioController extends Controller{
 
-	public function authenticate($post){
-		try{
-			$usuarioRepo = new UsuarioRepository();
-			$_REQUEST['usuario'] = $usuarioRepo->get_usuario($post['login'], $post['senha']);
-
-			$this->load_controller('ProdutoController', 'get_all_produtos', $post);
-		}
-		catch(Exception $e){
-			$this->show_error($e->getMessage());
-			$this->load_view('usuario/login.php');
-		}
-	}
 
 	public function openLogin($post){
 		$this->load_view('usuario/login.php');
