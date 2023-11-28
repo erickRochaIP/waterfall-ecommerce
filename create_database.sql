@@ -129,3 +129,17 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+
+DELIMITER //
+CREATE TRIGGER remocao_produto_carrinho
+BEFORE UPDATE ON ITEM_PEDIDO
+FOR EACH ROW
+BEGIN
+  IF NEW.QUANTIDADE = 0 THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Erro: Produto não pode ser removido do carrinho.';
+  END IF;
+END;
+//
+DELIMITER ;
