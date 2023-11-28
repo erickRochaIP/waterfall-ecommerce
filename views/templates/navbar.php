@@ -64,6 +64,15 @@
         </li>
 
         <?php endif; ?>
+        
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Carrinho </a>
+
+            <input type="hidden" name="class" value="Pedido"/> 
+            <input type="hidden" name="action" value="open_carrinho"/>
+        </form>
+        </li>
 
     </ul>
     <?php if (isset($_SESSION['usuario'])): ?>
@@ -74,5 +83,7 @@
         </span>
 
     <?php endif; ?>
+
+    
   </div>
 </nav>

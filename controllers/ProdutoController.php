@@ -12,5 +12,6 @@ class ProdutoController extends Controller{
 
 		$this->load_view('produto/entry.php');
 	}
+
 }
 ?>

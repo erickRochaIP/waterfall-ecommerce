@@ -19,8 +19,8 @@ class UsuarioController extends Controller{
 			$_SESSION['usuario'][] = $usuario->getLogin();
 			$_SESSION['usuario'][] = $usuario->getNome();
 
-			//$this->load_controller('ProdutoController', 'get_all_produtos', $post);
-            $this->load_view('usuario/login.php');
+			$this->load_controller('ProdutoController', 'get_all_produtos', $post);
+            //$this->load_view('usuario/login.php');
 		}
 		catch(Exception $e){
 			$this->show_error($e->getMessage());

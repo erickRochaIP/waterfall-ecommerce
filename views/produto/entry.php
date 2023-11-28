@@ -27,22 +27,15 @@
             </table>
         <?php endif; ?>
         
-
-        <select>
-            <option value="Select">0</option>
-            <option value="Select">1</option>
-            <option value="Select">2</option>
-            <option value="Select">3</option>
-            <option value="Select">4</option>
-            <option value="Select">5</option>
-            <option value="Select">6</option>
-            <option value="Select">7</option>
-            <option value="Select">8</option>
-            <option value="Select">9</option>
-            <option value="Select">10</option>
-        </select>
-        
-        <button> adicionar ao carrinho </button>
+        <form action="index.php" method="post">
+            <input type="number" name="quantidade" min="0" max="10">
+            <button> adicionar ao carrinho </button>
+            
+            
+            <input type="hidden" name="class" value="Pedido"/> 
+            <input type="hidden" name ="action" value="add"/>
+            <input type="hidden" name="idProduto" value= <?php echo $produto->get_idproduto() ?> />
+            </form>
     
     </div>
     <?php endforeach; ?>
