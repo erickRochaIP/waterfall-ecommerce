@@ -43,7 +43,7 @@ class UsuarioRepository extends Repository{
 	}
 
 	public function get_usuario($login, $senha){
-		$sql = 'SELECT LOGIN FROM USUARIO WHERE LOGIN= :login and SENHA= :senha';
+		$sql = 'SELECT LOGIN, NOME FROM USUARIO WHERE LOGIN= :login and SENHA= :senha';
 		$stmt = $this->conec->prepare($sql);
 		$stmt->bindValue(':login', $login);
 		$stmt->bindValue(':senha', $senha);
