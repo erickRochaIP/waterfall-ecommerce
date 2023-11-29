@@ -11,7 +11,7 @@
     <?php foreach ($_REQUEST['produtos'] as $produto): ?>
     <div>
     <hr>
-        <?php echo $produto->get_idproduto() ?>
+        <?php echo $produto->get_id_produto() ?>
         <?php echo $produto->get_nome() ?>
         <?php echo $produto->get_descricao() ?>
         <?php echo $produto->get_nome_categoria() ?>
@@ -34,7 +34,7 @@
             
             <input type="hidden" name="class" value="Pedido"/> 
             <input type="hidden" name ="action" value="add"/>
-            <input type="hidden" name="idProduto" value= <?php echo $produto->get_idproduto() ?> />
+            <input type="hidden" name="idProduto" value= <?php echo $produto->get_id_produto() ?> />
             </form>
     
     </div>

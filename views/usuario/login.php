@@ -36,7 +36,7 @@
             <button> sign up </button>
 
             <input type="hidden" name="class" value="Usuario"/> 
-            <input type="hidden" name="action" value="openSignUp"/>
+            <input type="hidden" name="action" value="open_sign_up"/>
         </p>
     </form>
 </div>

@@ -17,7 +17,7 @@ if(isset($_POST['class']) && isset($_POST['action'])){
     require_once __DIR__.'/controllers/UsuarioController.php';
 
     $controller = new UsuarioController();
-    $controller->openLogin($_POST);
+    $controller->open_login($_POST);
 }
 
 ?>

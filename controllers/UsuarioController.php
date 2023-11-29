@@ -5,7 +5,7 @@ require_once __DIR__ .'/../models/Usuario.php';
 class UsuarioController extends Controller{
 
 
-	public function openLogin($post){
+	public function open_login($post){
 		$this->load_view('usuario/login.php');
 	}
 
@@ -16,8 +16,8 @@ class UsuarioController extends Controller{
 			$_REQUEST['usuario'] = $usuario;
 			
 			$_SESSION['usuario'] = array();
-			$_SESSION['usuario'][] = $usuario->getLogin();
-			$_SESSION['usuario'][] = $usuario->getNome();
+			$_SESSION['usuario'][] = $usuario->get_login();
+			$_SESSION['usuario'][] = $usuario->get_nome();
 
 			$this->load_controller('ProdutoController', 'get_all_produtos', $post);
             //$this->load_view('usuario/login.php');
@@ -28,11 +28,11 @@ class UsuarioController extends Controller{
 		}
 	}
 
-	public function openSignUp($post){
+	public function open_sign_up($post){
 		$this->load_view('usuario/signUp.php');
 	}
 
-	public function authenticateSignUp($post){
+	public function authenticate_sign_up($post){
 		if($post['senha'] != $post['senha_confirma']){
 			$this->show_error('Os dois campos de Senha devem ser iguais');
 			$this->load_view('usuario/signUp.php');

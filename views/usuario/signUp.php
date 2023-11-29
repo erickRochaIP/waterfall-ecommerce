@@ -26,7 +26,7 @@
     </p>
 
     <input type="hidden" name="class" value="Usuario"/> 
-    <input type="hidden" name="action" value="authenticateSignUp"/>
+    <input type="hidden" name="action" value="authenticate_sign_up"/>
     
     </form>
 </div>

@@ -1,11 +1,11 @@
 <table>
-    <?php foreach ($_REQUEST['pedidos'] as $pedido): ?>
+    <?php foreach ($_REQUEST['itens_pedido'] as $item_pedido): ?>
     <div>
         <hr>
-            <?php echo $pedido->getIdpedido() ?>
-            <?php echo $pedido->getProduto()->get_idProduto() ?>
-            <?php echo $pedido->getQuantidade() ?>
-            <?php echo $pedido->getProduto()->get_nome()?>
+            <?php echo $item_pedido->get_id_pedido() ?>
+            <?php echo $item_pedido->get_produto()->get_id_produto() ?>
+            <?php echo $item_pedido->get_quantidade() ?>
+            <?php echo $item_pedido->get_produto()->get_nome()?>
         
     </div>
     <?php endforeach; ?>
@@ -14,6 +14,6 @@
         <button> comprar </button>
 
         <input type="hidden" name="class" value="Pedido"/> 
-        <input type="hidden" name ="action" value="newCompra"/>
+        <input type="hidden" name ="action" value="new_compra"/>
     </form>
 </table>

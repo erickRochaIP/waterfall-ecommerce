@@ -31,7 +31,7 @@
             <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Login </a>
 
             <input type="hidden" name="class" value="Usuario"/>
-            <input type="hidden" name="action" value="openLogin"/>
+            <input type="hidden" name="action" value="open_login"/>
         </form>
         </li>
 
@@ -41,7 +41,7 @@
             <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Sign Up </a>
 
             <input type="hidden" name="class" value="Usuario"/> 
-            <input type="hidden" name="action" value="openSignUp"/>
+            <input type="hidden" name="action" value="open_sign_up"/>
         </form>
         </li>
 

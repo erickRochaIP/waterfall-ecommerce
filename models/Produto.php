@@ -14,7 +14,7 @@ class Produto {
     }
 
     
-    public function get_idproduto() {
+    public function get_id_produto() {
         return $this->id_produto;
     }
     public function get_nome(){

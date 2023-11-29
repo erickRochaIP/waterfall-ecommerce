@@ -29,5 +29,12 @@ abstract class Controller{
         $controller = new $class();
         $controller->$action($post);
     }
+
+    public function get_session_login(){
+        if (!isset($_SESSION['usuario'])) {
+            throw new Exception("Não credenciado.");
+        }
+        return $_SESSION['usuario'][1];
+    }
 }
 ?>

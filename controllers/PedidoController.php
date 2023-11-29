@@ -9,22 +9,17 @@ class PedidoController extends Controller{
 		$pedidoRepo = new PedidoRepository();
         
         try {
-            
-            if (!isset($_SESSION['usuario'])) {
-                throw new Exception("Não credenciado.");
-            }
-            $log = $_SESSION['usuario'][1];
+            $log = $this->get_session_login();
             $pedido = $pedidoRepo ->get_carrinho($log);
-            
     
             //adc item
-            $pedidoRepo->create_item_produto($pedido->getId(),$post["idProduto"],$post["quantidade"]); 
+            $pedidoRepo->create_item_pedido($pedido->get_id(),$post["idProduto"],$post["quantidade"]); 
             
             $this->load_controller('ProdutoController', 'get_all_produtos', $post);
         }
         catch(Exception $e){
             $this->show_error($e->getMessage());
-            $this->load_controller('UsuarioController', 'openLogin', $post);
+            $this->load_controller('UsuarioController', 'open_login', $post);
             
         }
         
@@ -34,29 +29,25 @@ class PedidoController extends Controller{
         $pedidoRepo = new PedidoRepository();
 
         try {
-            
-            if (!isset($_SESSION['usuario'])) {
-                throw new Exception("Não credenciado.");
-            }
-            $log = $_SESSION['usuario'][1];
+            $log = $this->get_session_login();
     
-            $_REQUEST['pedidos'] = $pedidoRepo->get_all_itens_produto($log);
+            $_REQUEST['itens_pedido'] = $pedidoRepo->get_all_itens_pedido($log);
 
             $this->load_view('pedido/carrinho.php');
         }
         catch(Exception $e){
             $this->show_error($e->getMessage());
-            $this->load_controller('UsuarioController', 'openLogin', $post);
+            $this->load_controller('UsuarioController', 'open_login', $post);
             
         }
         
     }
 
-    public function newCompra($post){
+    public function new_compra($post){
         $this->load_view('pedido/pagamento.php');
     }
 
-    public function adcPagamento($post){
+    public function add_pagamento($post){
         //continuar 
     }
 }

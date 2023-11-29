@@ -42,7 +42,7 @@
     
      
         <input type="hidden" name="class" value="Pedido"/> 
-        <input type="hidden" name="action" value="adcPagamento"/>
+        <input type="hidden" name="action" value="add_pagamento"/>
     
     </form>
 

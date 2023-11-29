@@ -5,19 +5,19 @@ class Usuario {
 	private $login;
 	private $nome;
 
-	public function getLogin(){
+	public function get_login(){
 		return $this->login;
 	}
 
-	public function getNome(){
+	public function get_nome(){
 		return $this->nome;
 	}
 
-	public function setLogin($login){
+	public function set_login($login){
 		$this->login = $login;
 	}
 
-	public function setNome($nome){
+	public function set_nome($nome){
 		$this->nome = $nome;
 	}
 }
@@ -33,8 +33,8 @@ class UsuarioRepository extends Repository{
 		$usuarios = array();
 		while ($row = $stmt->fetch()){
 			$usuario = new Usuario();
-			$usuario->setLogin($row['LOGIN']);
-			$usuario->setNome($row['NOME']);
+			$usuario->set_login($row['LOGIN']);
+			$usuario->set_nome($row['NOME']);
 
 			$usuarios[] = $usuario;
 		}
@@ -57,8 +57,8 @@ class UsuarioRepository extends Repository{
 		$row = $stmt->fetch();
 
 		$usuario = new Usuario();
-		$usuario->setLogin($row['LOGIN']);
-		$usuario->setNome($row['NOME']);
+		$usuario->set_login($row['LOGIN']);
+		$usuario->set_nome($row['NOME']);
 
 		return $usuario;
 	}

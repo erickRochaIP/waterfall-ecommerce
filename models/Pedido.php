@@ -7,27 +7,27 @@ class Pedido{
   private $login;
   private $status;
   
-  public function getId(){
+  public function get_id(){
     return $this->id;
   }
 
-  public function setId($id){
+  public function set_id($id){
     $this->id = $id;
   }
 
-  public function getLogin(){
+  public function get_login(){
     return $this->login;
   }
 
-  public function setLogin($login){
+  public function set_login($login){
     $this->login = $login;
   }
 
-  public function getStatus(){
+  public function get_status(){
     return $this->status;
   }
 
-  public function setStatus($status){
+  public function set_status($status){
     $this->status = $status;
   }
 
@@ -40,35 +40,35 @@ class ItemPedido{
 
   private $produto;
 
-  public function getIdpedido(){
+  public function get_id_pedido(){
     return $this->id_pedido;
   }
 
-  public function setIdpedido($id_pedido){
+  public function set_id_pedido($id_pedido){
     $this->id_pedido = $id_pedido;
   }
 
-  public function getIdproduto(){
+  public function get_id_produto(){
     return $this->id_produto;
   }
 
-  public function setIdproduto($id_produto){
+  public function set_id_produto($id_produto){
     $this->id_produto = $id_produto;
   }
 
-  public function getQuantidade(){
+  public function get_quantidade(){
     return $this->quantidade;
   }
 
-  public function setQuantidade($quantidade){
+  public function set_quantidade($quantidade){
     $this->quantidade = $quantidade;
   }
 
-  public function getProduto(){
+  public function get_produto(){
     return $this->produto;
   }
 
-  public function setProduto($produto){
+  public function set_produto($produto){
     $this->produto = $produto;
   }
 }
@@ -88,9 +88,9 @@ class PedidoRepository extends Repository{
     $row = $stmt->fetch();
     
 		$pedido = new Pedido();
-    $pedido->setId($row['ID_PEDIDO']);
-    $pedido->setLogin($login);
-    $pedido->setStatus(0);
+    $pedido->set_id($row['ID_PEDIDO']);
+    $pedido->set_login($login);
+    $pedido->set_status(0);
     return $pedido;
 	}
 
@@ -110,7 +110,7 @@ class PedidoRepository extends Repository{
     return $this->get_carrinho($login);
   }
 
-  public function create_item_produto($idPedido, $idProduto, $quantidade){
+  public function create_item_pedido($idPedido, $idProduto, $quantidade){
     $sql = 'INSERT INTO ITEM_PEDIDO(ID_PEDIDO, ID_PRODUTO, QUANTIDADE)
             VALUES (?, ?, ?)';
 
@@ -124,10 +124,10 @@ class PedidoRepository extends Repository{
     }
   }
 
-  public function get_all_itens_produto($login){
+  public function get_all_itens_pedido($login){
     $carrinho = $this->get_carrinho($login);
 
-    $id = $carrinho->getId();
+    $id = $carrinho->get_id();
 
     $sql = 'SELECT I.ID_PEDIDO, I.ID_PRODUTO, I.QUANTIDADE, P.NOME  FROM ITEM_PEDIDO I
             JOIN PRODUTO P ON P.ID_PRODUTO = I.ID_PRODUTO
@@ -148,9 +148,9 @@ class PedidoRepository extends Repository{
           
       $item_pedido = new ItemPedido();
       
-      $item_pedido->setProduto($produto);
-      $item_pedido->setQuantidade($row['QUANTIDADE']);
-      $item_pedido->setIdpedido($row['ID_PEDIDO']);
+      $item_pedido->set_produto($produto);
+      $item_pedido->set_quantidade($row['QUANTIDADE']);
+      $item_pedido->set_id_pedido($row['ID_PEDIDO']);
       
       $itens_pedido[] = $item_pedido;
 		}
