@@ -3,6 +3,8 @@ require_once __DIR__ .'/../controllers/Controller.php';
 require_once __DIR__ .'/../models/Pedido.php';
 
 class PedidoController extends Controller{
+
+
     public function add($post){
 		$pedidoRepo = new PedidoRepository();
         
@@ -12,8 +14,12 @@ class PedidoController extends Controller{
                 throw new Exception("Não credenciado.");
             }
             $log = $_SESSION['usuario'][1];
-            $pedidoRepo ->get_carrinho($log);
-
+            $pedido = $pedidoRepo ->get_carrinho($log);
+            
+    
+            //adc item
+            $pedidoRepo->create_item_produto($pedido->getId(),$post["idProduto"],$post["quantidade"]); 
+            
             $this->load_controller('ProdutoController', 'get_all_produtos', $post);
         }
         catch(Exception $e){
@@ -33,7 +39,8 @@ class PedidoController extends Controller{
                 throw new Exception("Não credenciado.");
             }
             $log = $_SESSION['usuario'][1];
-            $pedidoRepo ->get_carrinho($log);
+    
+            $_REQUEST['pedidos'] = $pedidoRepo->get_all_itens_produto($log);
 
             $this->load_view('pedido/carrinho.php');
         }
@@ -43,6 +50,14 @@ class PedidoController extends Controller{
             
         }
         
+    }
+
+    public function newCompra($post){
+        $this->load_view('pedido/pagamento.php');
+    }
+
+    public function adcPagamento($post){
+        //continuar 
     }
 }
 ?>
