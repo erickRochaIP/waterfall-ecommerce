@@ -159,5 +159,28 @@ class PedidoRepository extends Repository{
 
   }
 
+  public function get_total_carrinho($login){
+    $carrinho = $this->get_carrinho($login);
+
+    $id = $carrinho->get_id();
+
+    $sql = 'SELECT SUM(I.QUANTIDADE * P.PRECO) AS TOTAL FROM ITEM_PEDIDO I 
+    JOIN PRODUTO P ON P.ID_PRODUTO = I.ID_PRODUTO WHERE I.ID_PEDIDO = :id';
+
+    $stmt = $this->conec->prepare($sql);
+    $stmt->bindValue(':id', $id);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt->execute();
+
+    $row = $stmt->fetch();
+
+    return $row['TOTAL'];
+    
+  }
+
+  public function create_pagamento($login){
+    
+  }
+
 }
 ?>

@@ -10,7 +10,7 @@ class PedidoController extends Controller{
         
         try {
             $log = $this->get_session_login();
-            $pedido = $pedidoRepo ->get_carrinho($log);
+            $pedido = $pedidoRepo->get_carrinho($log);
     
             //adc item
             $pedidoRepo->create_item_pedido($pedido->get_id(),$post["idProduto"],$post["quantidade"]); 
@@ -48,7 +48,41 @@ class PedidoController extends Controller{
     }
 
     public function add_pagamento($post){
-        //continuar 
+        $pedidoRepo = new PedidoRepository();
+        $log = $this->get_session_login();
+
+        $total = $pedidoRepo->get_total_carrinho($log);
+
+        $endereco = $post['endereco'];
+        $forma_pagamento = $post['tipo_pagamento'];
+        $vezes = $post['vezes'];
+
+        try{
+            if ($forma_pagamento == "credito"){
+                $valor_pagamento = $total/$vezes;
+
+                for ($i = 0; $i < $vezes; $i++){
+                    //fazer x pagamentos
+                }
+            }
+            else if($forma_pagamento == "debito"){
+                //fazer um pagamento
+            }
+            else {
+                throw new Exeption("Erro no tipo de pagamento");
+            }
+        }
+        catch(Exeption $e){
+            $this->show_error($e->getMessage());
+        }
+
+
     }
+
+    public function open_pedidos($post){
+        //
+    }
+
+    
 }
 ?>

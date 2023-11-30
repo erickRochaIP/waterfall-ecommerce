@@ -74,6 +74,15 @@
         </form>
         </li>
 
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Meus Pedidos </a>
+
+            <input type="hidden" name="class" value="Pedido"/> 
+            <input type="hidden" name="action" value="open_pedidos"/>
+        </form>
+        </li>
+
     </ul>
     <?php if (isset($_SESSION['usuario'])): ?>
 
