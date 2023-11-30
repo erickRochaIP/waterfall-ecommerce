@@ -43,37 +43,42 @@ class PedidoController extends Controller{
         
     }
 
+    // Esses metodos ficam aqui? E a PagamentoController?
     public function new_compra($post){
         $this->load_view('pedido/pagamento.php');
     }
 
     public function add_pagamento($post){
-        $pedidoRepo = new PedidoRepository();
-        $log = $this->get_session_login();
-
-        $total = $pedidoRepo->get_total_carrinho($log);
-
-        $endereco = $post['endereco'];
-        $forma_pagamento = $post['tipo_pagamento'];
-        $vezes = $post['vezes'];
-
         try{
-            if ($forma_pagamento == "credito"){
-                $valor_pagamento = $total/$vezes;
-
-                for ($i = 0; $i < $vezes; $i++){
-                    //fazer x pagamentos
-                }
-            }
-            else if($forma_pagamento == "debito"){
-                //fazer um pagamento
-            }
-            else {
+            $endereco = $post['endereco'];
+            $tipo_pagamento = $post['tipo_pagamento'];
+            $vezes = $tipo_pagamento == "credito" ? $post['vezes'] : 1;
+            if ($tipo_pagamento != "credito" && $tipo_pagamento != "debito") {
                 throw new Exeption("Erro no tipo de pagamento");
             }
+
+            $pedidoRepo = new PedidoRepository();
+            $log = $this->get_session_login();
+    
+            $total = $pedidoRepo->get_total_carrinho($log);
+
+            $valor_pagamento = $total/$vezes;
+
+            for ($i = 0; $i < $vezes; $i++){
+                $pedidoRepo->create_pagamento($log, $endereco, $tipo_pagamento, $valor_pagamento);
+            }
+
+            $pedidoRepo->set_carrinho_pago($log);
+
+            // carregar alguma view
+            $this->load_controller('ProdutoController', 'get_all_produtos', $post);
+            
         }
         catch(Exeption $e){
             $this->show_error($e->getMessage());
+
+            // carregar alguma view
+            $this->load_controller('ProdutoController', 'get_all_produtos', $post);
         }
 
 

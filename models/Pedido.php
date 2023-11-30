@@ -178,8 +178,43 @@ class PedidoRepository extends Repository{
     
   }
 
-  public function create_pagamento($login){
-    
+
+  // O lugar desse metodo e aqui?
+  public function create_pagamento($login, $endereco, $tipo_pagamento, $total){
+    // Onde deve estar essa logica?
+    $tipo_pagamento = $tipo_pagamento == "credito" ? 1 : 0;
+
+    $carrinho = $this->get_carrinho($login);
+
+    $id = $carrinho->get_id();
+
+    $sql = 'INSERT INTO PAGAMENTO(TIPO, ENDERECO, ID_PEDIDO, TOTAL)
+            VALUES (?, ?, ?, ?)';
+
+    $stmt = $this->conec->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $funcionou = $stmt->execute([$tipo_pagamento, $endereco, $id, $total]);
+
+
+    if (!$funcionou){
+      throw new Exception('Problemas ao criar pagamento');
+    }
+  }
+
+  public function set_carrinho_pago($login){
+    $carrinho = $this->get_carrinho($login);
+
+    $id = $carrinho->get_id();
+
+    $sql = 'UPDATE PEDIDO SET STATUS = 1 WHERE ID_PEDIDO=?';
+
+    $stmt = $this->conec->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $funcionou = $stmt->execute([$id]);
+
+    if (!$funcionou){
+      throw new Exception('Problemas ao mudar status do carrinho');
+    }
   }
 
 }
