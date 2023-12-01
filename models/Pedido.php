@@ -152,6 +152,29 @@ class PedidoRepository extends Repository{
     }
   }
 
+  public function update_item_pedido($id_pedido, $id_produto, $quantidade){
+    $sql = 'UPDATE ITEM_PEDIDO SET QUANTIDADE = ? WHERE ID_PEDIDO = ? AND ID_PRODUTO = ?';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute([$quantidade, $id_pedido, $id_produto]);
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao muda a quantidade');
+		}
+  }
+
+  public function delete_item_pedido($id_pedido, $id_produto){
+    $sql = 'DELETE FROM ITEM_PEDIDO WHERE ID_PEDIDO = ? AND ID_PRODUTO = ?';
+    $stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $funcionou = $stmt->execute([$id_pedido, $id_produto]);
+
+    if (!$funcionou){
+      throw new Exception("Erro ao excluir item do pedido");
+    }
+  }
+
   public function get_all_itens_pedido($login){
     $carrinho = $this->get_carrinho($login);
 

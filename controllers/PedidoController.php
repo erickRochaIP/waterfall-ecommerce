@@ -164,5 +164,40 @@ class PedidoController extends Controller{
 
 		$this->load_controller('PedidoController', 'get_all_pagamentos_admin', $post);
     }
+
+    public function edit_item_pedido($post){
+        $pedidoRepo = new PedidoRepository();
+		$quantidade = $post['quantidade'];
+		$id_pedido = $post['id_pedido'];
+        $id_produto = $post['id_produto'];
+
+		try{
+			$pedidoRepo->update_item_pedido($id_pedido, $id_produto, $quantidade);
+
+			$this->show_success('Item atualizado com sucesso!');
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('PedidoController', 'open_carrinho', $post);
+    }
+
+    public function delete_item_pedido($post){
+        $pedidoRepo = new PedidoRepository();
+		$id_pedido = $post['id_pedido'];
+        $id_produto = $post['id_produto'];
+
+		try{
+			$pedidoRepo->delete_item_pedido($id_pedido, $id_produto);
+
+			$this->show_success('Item deletado com sucesso!');
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('PedidoController', 'open_carrinho', $post);
+    }
 }
 ?>
