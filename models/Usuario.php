@@ -111,18 +111,24 @@ class UsuarioRepository extends Repository{
 			throw new Exception('Problemas ao mudar o nome');
 		}
 
-		$sql = 'SELECT NOME FROM USUARIO WHERE LOGIN= ?';
+		$sql = 'SELECT LOGIN, NOME, ADMIN FROM USUARIO WHERE LOGIN= :login';
 		$stmt = $this->conec->prepare($sql);
 		$stmt->bindValue(':login', $login);
 		$stmt->setFetchMode(PDO::FETCH_ASSOC);
-		$funcionou = $stmt->execute();
+		$stmt->execute();
 
-		if (!$funcionou){
-			throw new Exception('Problemas ao mudar o nome');
+		if($stmt->rowCount() != 1){
+			throw new Exception('USUARIO NA ENCONTRADO');
 		}
 
 		$row = $stmt->fetch();
-		return $row['NOME'];
+
+		$usuario = new Usuario();
+		$usuario->set_login($row['LOGIN']);
+		$usuario->set_nome($row['NOME']);
+		$usuario->set_admin($row['ADMIN']);
+
+		return $usuario;
 	}
 }
 

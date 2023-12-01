@@ -40,7 +40,7 @@ abstract class Controller{
         if (!isset($_SESSION['usuario'])) {
             throw new Exception("Não credenciado.");
         }
-        return $_SESSION['usuario'][1];
+        return $_SESSION['usuario'][0];
     }
 
     public function get_session_admin(){
