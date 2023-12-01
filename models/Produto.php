@@ -185,6 +185,19 @@ class ProdutoRepository extends Repository{
 		}
     }
 
+    public function create_produto($nome, $categoria, $descricao, $preco){
+        $sql = 'INSERT INTO PRODUTO(NOME, NOME_CATEGORIA, DESCRICAO, PRECO)
+        VALUES (?, ?, ?, ?)';
+
+        $stmt = $this->conec->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $funcionou = $stmt->execute([$nome, $categoria, $descricao, $preco]);
+
+        if (!$funcionou){
+            throw new Exception('Problemas ao adicionar produto');
+        }
+    }
+
     
 }
 

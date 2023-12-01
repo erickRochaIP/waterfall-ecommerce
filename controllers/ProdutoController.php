@@ -51,7 +51,23 @@ class ProdutoController extends Controller{
 		}
 
 		$this->load_controller('ProdutoController', 'get_all_produtos_admin', $post);
+	}
 
+	public function create_produto($post){
+		$produtoRepo = new ProdutoRepository();
+		$nome = $post['nome'];
+		$categoria = $post['categoria'];
+		$descricao = $post['descricao'];
+		$preco = $post['preco'];
+
+		try{
+			$produtoRepo->create_produto($nome, $categoria, $descricao, $preco);
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('ProdutoController', 'get_all_produtos_admin', $post);
 	}
 
 
