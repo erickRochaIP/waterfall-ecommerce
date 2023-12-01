@@ -99,6 +99,31 @@ class UsuarioRepository extends Repository{
 
 		return ($stmt->rowCount() != 0);
 	}
+
+	public function update_name($login, $nome){
+		$sql = 'UPDATE USUARIO SET NOME = ? WHERE LOGIN = ?';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute([$nome, $login]);
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao mudar o nome');
+		}
+
+		$sql = 'SELECT NOME FROM USUARIO WHERE LOGIN= ?';
+		$stmt = $this->conec->prepare($sql);
+		$stmt->bindValue(':login', $login);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute();
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao mudar o nome');
+		}
+
+		$row = $stmt->fetch();
+		return $row['NOME'];
+	}
 }
 
 ?>

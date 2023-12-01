@@ -83,6 +83,15 @@
         </form>
         </li>
 
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> Perfil </a>
+
+            <input type="hidden" name="class" value="Usuario"/> 
+            <input type="hidden" name="action" value="perfil"/>
+        </form>
+        </li>
+
     </ul>
     <?php if (isset($_SESSION['usuario'])): ?>
 

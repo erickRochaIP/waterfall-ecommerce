@@ -60,5 +60,25 @@ class UsuarioController extends Controller{
 
 		$this->load_view('usuario/login.php');
 	}
+
+	public function perfil($post){
+		$this->load_view('usuario/perfil.php');
+	}
+
+	public function update_name($post){
+		$usuarioRepo = new UsuarioRepository();
+		$new_name = $post['name'];
+
+		try{
+			$log = $this->get_session_login();
+
+			$_SESSION['usuario'][1] = $usuarioRepo->update_name($log, $new_name);
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_view('usuario/perfil.php');
+	}
 }
 ?>
