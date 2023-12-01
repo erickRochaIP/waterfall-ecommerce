@@ -44,19 +44,10 @@
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">edit Pedidos </a>
-
-            <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="edit_Pedidos"/>
-        </form>
-        </li>
-
-        <li class="nav-item active">
-        <form action="index.php" method="post">
             <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Categorias </a>
 
-            <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="edit_categoria"/>
+            <input type="hidden" name="class" value="Categoria"/> 
+            <input type="hidden" name="action" value="get_all_categorias"/>
         </form>
         </li>
 
@@ -65,7 +56,7 @@
             <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Pagamento </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="edit_pagamento"/>
+            <input type="hidden" name="action" value="get_all_pagamentos_admin"/>
         </form>
         </li>
 

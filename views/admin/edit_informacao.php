@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-md-8">              
                                 <!-- <label for="preco" class="col-sm-2 col-form-label">Preço:</label> -->
-                                <input type="text" class="form-control" name="corpo" placeholder=<?php echo $informacao->get_corpo() ?>>
+                                <input type="text" class="form-control" name="corpo" placeholder="<?php echo $informacao->get_corpo() ?>">
                             </div>
 
                             <div class="col-md-4"> 

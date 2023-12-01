@@ -117,5 +117,52 @@ class PedidoController extends Controller{
 
         }
     } 
+
+    public function get_all_pagamentos_admin($post){
+        $pedidoRepo = new PedidoRepository();
+
+        try {
+            $_REQUEST['pagamentos'] = $pedidoRepo->get_all_pagamentos_admin();
+            
+            $this->load_view('admin/edit_pagamento.php');
+        }
+        catch(Exception $e){
+            $this->show_error($e->getMessage());
+        }
+
+    }
+
+    public function edit_pagamento($post){
+        $pedidoRepo = new PedidoRepository();
+		$endereco = $post['endereco'];
+		$codigo = $post['codigo'];
+
+		try{
+			$pedidoRepo->update_pagamento($codigo, $endereco);
+
+			$this->show_success('Pagamento atualizado com sucesso!');
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('PedidoController', 'get_all_pagamentos_admin', $post);
+    }
+
+    public function delete_pagamento($post){
+        $pedidoRepo = new PedidoRepository();
+		$codigo = $post['codigo'];
+
+		try{
+			$pedidoRepo->delete_pagamento($codigo);
+
+			$this->show_success('Pagamento deletado com sucesso!');
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('PedidoController', 'get_all_pagamentos_admin', $post);
+    }
 }
 ?>

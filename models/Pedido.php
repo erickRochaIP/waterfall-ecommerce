@@ -288,15 +288,15 @@ class PedidoRepository extends Repository{
       }
       else {
         
-$sql = 'SELECT  PE.ID_PEDIDO, PE.STATUS, PA.CODIGO, PA.ENDERECO, PA.TOTAL, PA.TIPO FROM PEDIDO PE
-        JOIN PAGAMENTO PA ON PE.ID_PEDIDO = PA.ID_PEDIDO
-        WHERE PE.ID_PEDIDO IN(
-        SELECT  PA.ID_PEDIDO
-       FROM PAGAMENTO PA JOIN PEDIDO PE 
-       ON PA.ID_PEDIDO=PE.ID_PEDIDO 
-       WHERE PE.LOGIN_USUARIO = :login AND PE.STATUS <> 0
-       GROUP BY(PA.ID_PEDIDO)
-       HAVING SUM(PA.TOTAL)> :filtro)';
+        $sql = 'SELECT  PE.ID_PEDIDO, PE.STATUS, PA.CODIGO, PA.ENDERECO, PA.TOTAL, PA.TIPO FROM PEDIDO PE
+                JOIN PAGAMENTO PA ON PE.ID_PEDIDO = PA.ID_PEDIDO
+                WHERE PE.ID_PEDIDO IN(
+                SELECT  PA.ID_PEDIDO
+              FROM PAGAMENTO PA JOIN PEDIDO PE 
+              ON PA.ID_PEDIDO=PE.ID_PEDIDO 
+              WHERE PE.LOGIN_USUARIO = :login AND PE.STATUS <> 0
+              GROUP BY(PA.ID_PEDIDO)
+              HAVING SUM(PA.TOTAL)> :filtro)';
 
 
         $stmt = $this->conec->prepare($sql);
@@ -336,5 +336,49 @@ $sql = 'SELECT  PE.ID_PEDIDO, PE.STATUS, PA.CODIGO, PA.ENDERECO, PA.TOTAL, PA.TI
       }
   }
 
+  public function get_all_pagamentos_admin(){
+    $sql = 'SELECT CODIGO, ENDERECO, ID_PEDIDO, TIPO, TOTAL 
+          FROM PAGAMENTO';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$stmt->execute();
+
+		$pagamentos = array();
+		while ($row = $stmt->fetch()){
+                $pagamento = new Pagamento();
+            
+                $pagamento->set_codigo($row['CODIGO']);
+                $pagamento->set_endereco($row['ENDERECO']);
+                $pagamento->set_id_pedido($row['ID_PEDIDO']);
+                $pagamento->set_tipo($row['TIPO']);
+                $pagamento->set_total($row['TOTAL']);
+                $pagamentos[] = $pagamento;    
+        }
+        return $pagamentos;
+  }
+
+  public function update_pagamento($codigo, $endereco){
+    $sql = 'UPDATE PAGAMENTO SET ENDERECO = ? WHERE CODIGO = ?';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute([$endereco, $codigo]);
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao mudar o endereco');
+		}
+  }
+
+  public function delete_pagamento($codigo){
+    $sql = 'DELETE FROM PAGAMENTO WHERE CODIGO = ?';
+    $stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $funcionou = $stmt->execute([$codigo]);
+
+    if (!$funcionou){
+      throw new Exception("Erro ao excluir pagamento");
+    }
+  }
 }
 ?>
