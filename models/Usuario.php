@@ -4,6 +4,7 @@ require_once __DIR__ .'/../models/Repository.php';
 class Usuario {
 	private $login;
 	private $nome;
+	private $admin;
 
 	public function get_login(){
 		return $this->login;
@@ -19,6 +20,17 @@ class Usuario {
 
 	public function set_nome($nome){
 		$this->nome = $nome;
+	}
+
+	public function set_admin($admin){
+		$this->admin = $admin;
+	}
+
+	public function get_admin(){
+		if($this->admin == 1){
+			return true;
+		}
+		return false;
 	}
 }
 
@@ -43,7 +55,7 @@ class UsuarioRepository extends Repository{
 	}
 
 	public function get_usuario($login, $senha){
-		$sql = 'SELECT LOGIN, NOME FROM USUARIO WHERE LOGIN= :login and SENHA= :senha';
+		$sql = 'SELECT LOGIN, NOME, ADMIN FROM USUARIO WHERE LOGIN= :login and SENHA= :senha';
 		$stmt = $this->conec->prepare($sql);
 		$stmt->bindValue(':login', $login);
 		$stmt->bindValue(':senha', $senha);
@@ -59,6 +71,7 @@ class UsuarioRepository extends Repository{
 		$usuario = new Usuario();
 		$usuario->set_login($row['LOGIN']);
 		$usuario->set_nome($row['NOME']);
+		$usuario->set_admin($row['ADMIN']);
 
 		return $usuario;
 	}

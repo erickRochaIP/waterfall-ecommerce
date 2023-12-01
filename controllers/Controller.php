@@ -12,7 +12,13 @@ abstract class Controller{
     public function load_view($path){
         require __DIR__ .'/../views/templates/links.php';
         require __DIR__ .'/../views/templates/start_body.php';
-        require __DIR__ .'/../views/templates/navbar.php';
+        if($this->get_session_admin()){
+            require __DIR__ .'/../views/templates/navbar_admin.php';
+        }
+        else{
+            require __DIR__ .'/../views/templates/navbar.php';
+        }
+        
         require __DIR__ .'/../views/templates/success.php';
         require __DIR__ .'/../views/templates/error.php';
         require __DIR__ .'/../views/'.$path;
@@ -35,6 +41,13 @@ abstract class Controller{
             throw new Exception("Não credenciado.");
         }
         return $_SESSION['usuario'][1];
+    }
+
+    public function get_session_admin(){
+        if (!isset($_SESSION['usuario'])) {
+            return false;
+        }
+        return $_SESSION['usuario'][2];
     }
 }
 ?>

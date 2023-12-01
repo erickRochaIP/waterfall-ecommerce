@@ -18,6 +18,7 @@ class UsuarioController extends Controller{
 			$_SESSION['usuario'] = array();
 			$_SESSION['usuario'][] = $usuario->get_login();
 			$_SESSION['usuario'][] = $usuario->get_nome();
+			$_SESSION['usuario'][] = $usuario->get_admin();
 
 			$this->load_controller('ProdutoController', 'get_all_produtos', $post);
             //$this->load_view('usuario/login.php');

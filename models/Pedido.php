@@ -125,6 +125,19 @@ class PedidoRepository extends Repository{
     return $this->get_carrinho($login);
   }
 
+  public function exclude_carrinho($login){
+    $sql = 'DELETE FROM PEDIDO WHERE STATUS = 0 AND LOGIN_USUARIO = :login';
+    $stmt = $this->conec->prepare($sql);
+		$stmt->bindValue(':login', $login);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $funcionou = $stmt->execute();
+
+    if (!$funcionou){
+      throw new Exception("Erro ao excluir carrinho");
+    }
+
+  }
+
   public function create_item_pedido($idPedido, $idProduto, $quantidade){
     $sql = 'INSERT INTO ITEM_PEDIDO(ID_PEDIDO, ID_PRODUTO, QUANTIDADE)
             VALUES (?, ?, ?)';

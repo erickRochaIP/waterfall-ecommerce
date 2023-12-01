@@ -92,7 +92,7 @@ class ProdutoRepository extends Repository{
 	public function get_all_produtos(){
 		$sql = 'SELECT PRODUTO.ID_PRODUTO, PRODUTO.NOME, PRODUTO.DESCRICAO, PRODUTO.PRECO, 
         PRODUTO.NOME_CATEGORIA, INFORMACAO.TITULO, INFORMACAO.CORPO
-         FROM PRODUTO JOIN INFORMACAO ON INFORMACAO.ID_PRODUTO = PRODUTO.ID_PRODUTO';
+         FROM PRODUTO LEFT JOIN INFORMACAO ON INFORMACAO.ID_PRODUTO = PRODUTO.ID_PRODUTO';
 		$stmt = $this->conec->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_ASSOC);
 		$stmt->execute();
@@ -115,12 +115,15 @@ class ProdutoRepository extends Repository{
 
                 $produtos[] = $produto;
             }
-            $informacao = new Informacao();
             
-            $informacao->set_titulo($row['TITULO']);
-            $informacao->set_corpo($row['CORPO']);
+            if(!empty($row['TITULO'])){
+                $informacao = new Informacao();
+                $informacao->set_titulo($row['TITULO']);
+                $informacao->set_corpo($row['CORPO']);
 
-            $produto->add_informacao($informacao);
+                $produto->add_informacao($informacao);
+            }
+            
 		}
 
 		return $produtos;

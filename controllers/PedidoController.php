@@ -43,6 +43,23 @@ class PedidoController extends Controller{
         
     }
 
+    public function exclude_carrinho($post){
+        $pedidoRepo = new PedidoRepository();
+
+        try {
+            $log = $this->get_session_login();
+    
+            $pedidoRepo->exclude_carrinho($log);
+
+            $this->load_controller('ProdutoController', 'get_all_produtos', $post);
+        }
+        catch(Exception $e){
+            $this->show_error($e->getMessage());
+            $this->load_controller('ProdutoController', 'get_all_produtos', $post);
+            
+        }
+    }
+
     // Esses metodos ficam aqui? E a PagamentoController?
     public function new_compra($post){
         $this->load_view('pedido/pagamento.php');
@@ -83,6 +100,7 @@ class PedidoController extends Controller{
 
 
     }
+
 
     public function open_pedidos($post){
         $pedidoRepo = new PedidoRepository();

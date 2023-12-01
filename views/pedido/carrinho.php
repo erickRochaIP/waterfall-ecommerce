@@ -16,4 +16,11 @@
         <input type="hidden" name="class" value="Pedido"/> 
         <input type="hidden" name ="action" value="new_compra"/>
     </form>
+
+    <form action="index.php" method="post">
+        <button> excluir carrinho </button>
+
+        <input type="hidden" name="class" value="Pedido"/> 
+        <input type="hidden" name ="action" value="exclude_carrinho"/>
+    </form>
 </table>
