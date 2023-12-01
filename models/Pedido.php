@@ -271,6 +271,55 @@ class PedidoRepository extends Repository{
         }
     
         return $pedidos;
+        
+      }
+      else {
+        
+$sql = 'SELECT  PE.ID_PEDIDO, PE.STATUS, PA.CODIGO, PA.ENDERECO, PA.TOTAL, PA.TIPO FROM PEDIDO PE
+        JOIN PAGAMENTO PA ON PE.ID_PEDIDO = PA.ID_PEDIDO
+        WHERE PE.ID_PEDIDO IN(
+        SELECT  PA.ID_PEDIDO
+       FROM PAGAMENTO PA JOIN PEDIDO PE 
+       ON PA.ID_PEDIDO=PE.ID_PEDIDO 
+       WHERE PE.LOGIN_USUARIO = :login AND PE.STATUS <> 0
+       GROUP BY(PA.ID_PEDIDO)
+       HAVING SUM(PA.TOTAL)> :filtro)';
+
+
+        $stmt = $this->conec->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->bindValue(':filtro', $filtro);
+        $stmt->bindValue(':login', $login);
+        $stmt->execute();
+
+        
+        $id_pedido = -1;
+
+        $pedidos = array();
+        $pagamentos = array();
+        while ($row = $stmt->fetch()){
+                if ($row['ID_PEDIDO'] != $id_pedido){
+                    $id_pedido = $row['ID_PEDIDO'];
+    
+                    $pedido = new Pedido();
+                
+                    $pedido->set_id($row['ID_PEDIDO']);
+                    $pedido->set_status($row['STATUS']);
+                    
+                    $pedidos[] = $pedido;
+                }
+                $pagamento = new Pagamento();
+                
+                $pagamento->set_codigo($row['CODIGO']);
+                $pagamento->set_endereco($row['ENDERECO']);
+                $pagamento->set_total($row['TOTAL']);
+                $pagamento->set_tipo($row['TIPO']);
+    
+                $pedido->add_pagamento($pagamento);
+        }
+    
+        return $pedidos;
+        
       }
   }
 

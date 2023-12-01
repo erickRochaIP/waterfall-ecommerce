@@ -1,9 +1,17 @@
-<form>
-<div class="col-md-3">
-    <label for="login" class="col-sm-2 col-form-label">compras menores que: </label>
+<form class="row g-3" action="index.php" method="post">
+<div class="row g-3">
+    <label for="login" class="col-sm-2 col-form-label">compras maiores que: </label>
     <label class="visually-hidden" for="login">valor</label>
-    <input type="text" class="form-control" name="filtro" placeholder="Usuário">
+    <input type="text" class="form-control" name="filtro" placeholder="Filtro">
   </div>
+
+
+  <div class="col-md-6">
+    <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">select</button>
+  </div>
+    <input type="hidden" name="class" value="Pedido"/> 
+    <input type="hidden" name="action" value="open_pedidos"/>
+
 </form>
 
 <table>

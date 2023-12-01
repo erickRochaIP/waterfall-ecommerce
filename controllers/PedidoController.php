@@ -89,9 +89,9 @@ class PedidoController extends Controller{
 
         try {
             $log = $this->get_session_login();
-    
-            $_REQUEST['pedidos'] = $pedidoRepo->get_pedidos_pagos($log);
-
+            $filtro = isset($post['filtro']) ? $post['filtro'] : null ;
+            $_REQUEST['pedidos'] = $pedidoRepo->get_pedidos_pagos($log,$filtro);
+            
             $this->load_view('pedido/meus_pedidos.php');
         }
         catch(Exception $e){
