@@ -10,4 +10,10 @@
         <input type="hidden" name="action" value="update_name"/>
     </form>
 
+    <form action="index.php" method="post"> 
+        <button type="submit" class="btn btn-outline-danger" style="margin-top: 10px;">Deletar</button>
+
+        <input type="hidden" name="class" value="Usuario"/> 
+        <input type="hidden" name="action" value="delete_user"/>
+    </form>
 </div>

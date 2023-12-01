@@ -87,5 +87,21 @@ class UsuarioController extends Controller{
 
 		$this->load_controller('UsuarioController', 'perfil', $post);
 	}
+
+	public function delete_user($post){
+		$usuarioRepo = new UsuarioRepository();
+
+		try{
+			$log = $this->get_session_login();
+
+			$usuarioRepo->delete_user($log);
+			$this->load_controller('UsuarioController', 'logout', $post);
+
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+			$this->load_controller('UsuarioController', 'perfil', $post);
+		}
+	}
 }
 ?>

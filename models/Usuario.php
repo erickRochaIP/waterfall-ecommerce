@@ -130,6 +130,19 @@ class UsuarioRepository extends Repository{
 
 		return $usuario;
 	}
+
+	public function delete_user($login){
+		$sql = 'DELETE FROM USUARIO WHERE LOGIN = :login';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->bindValue(':login', $login);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute();
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao deletar o Usuario');
+		}
+	}
 }
 
 ?>
