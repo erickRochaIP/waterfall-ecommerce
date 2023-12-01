@@ -54,7 +54,7 @@ class PedidoController extends Controller{
             $tipo_pagamento = $post['tipo_pagamento'];
             $vezes = $tipo_pagamento == "credito" ? $post['vezes'] : 1;
             if ($tipo_pagamento != "credito" && $tipo_pagamento != "debito") {
-                throw new Exeption("Erro no tipo de pagamento");
+                throw new Exception("Erro no tipo de pagamento");
             }
 
             $pedidoRepo = new PedidoRepository();
@@ -74,7 +74,7 @@ class PedidoController extends Controller{
             $this->load_controller('ProdutoController', 'get_all_produtos', $post);
             
         }
-        catch(Exeption $e){
+        catch(Exception $e){
             $this->show_error($e->getMessage());
 
             // carregar alguma view
@@ -85,7 +85,21 @@ class PedidoController extends Controller{
     }
 
     public function open_pedidos($post){
-        //
+        $pedidoRepo = new PedidoRepository();
+
+        try {
+            $log = $this->get_session_login();
+    
+            $_REQUEST['pedidos'] = $pedidoRepo->get_pedidos_pagos($log);
+
+            $this->load_view('pedido/meus_pedidos.php');
+        }
+        catch(Exception $e){
+            $this->show_error($e->getMessage());
+
+        }
+
+
     }
 
     

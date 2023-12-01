@@ -1,11 +1,17 @@
 <?php
 require_once __DIR__ .'/../models/Repository.php';
 require_once __DIR__ .'/../models/Produto.php';
+require_once __DIR__ .'/../models/Pagamento.php';
 
 class Pedido{
   private $id;
   private $login;
   private $status;
+  private $pagamentos;
+
+  public function __construct(){
+    $this->pagamentos = array();
+  }
   
   public function get_id(){
     return $this->id;
@@ -29,6 +35,14 @@ class Pedido{
 
   public function set_status($status){
     $this->status = $status;
+  }
+
+  public function add_pagamento($pagamento){
+    $this->pagamentos[] = $pagamento;
+  }
+
+  public function get_pagamentos(){
+    return $this->pagamentos;
   }
 
 }
@@ -72,6 +86,7 @@ class ItemPedido{
     $this->produto = $produto;
   }
 }
+
 
 class PedidoRepository extends Repository{
   public function get_carrinho($login){
@@ -215,6 +230,48 @@ class PedidoRepository extends Repository{
     if (!$funcionou){
       throw new Exception('Problemas ao mudar status do carrinho');
     }
+  }
+
+  public function get_pedidos_pagos($login, $filtro = null){
+      if($filtro == null){
+
+        $sql = 'SELECT PE.ID_PEDIDO, PE.STATUS, PA.CODIGO, PA.ENDERECO, PA.TOTAL, PA.TIPO FROM PEDIDO PE
+        JOIN PAGAMENTO PA ON PE.ID_PEDIDO = PA.ID_PEDIDO 
+        WHERE PE.LOGIN_USUARIO = :login AND PE.STATUS <> 0';
+
+        $stmt = $this->conec->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->bindValue(':login', $login);
+        $stmt->execute();
+
+        
+        $id_pedido = -1;
+
+        $pedidos = array();
+        $pagamentos = array();
+        while ($row = $stmt->fetch()){
+                if ($row['ID_PEDIDO'] != $id_pedido){
+                    $id_pedido = $row['ID_PEDIDO'];
+    
+                    $pedido = new Pedido();
+                
+                    $pedido->set_id($row['ID_PEDIDO']);
+                    $pedido->set_status($row['STATUS']);
+                    
+                    $pedidos[] = $pedido;
+                }
+                $pagamento = new Pagamento();
+                
+                $pagamento->set_codigo($row['CODIGO']);
+                $pagamento->set_endereco($row['ENDERECO']);
+                $pagamento->set_total($row['TOTAL']);
+                $pagamento->set_tipo($row['TIPO']);
+    
+                $pedido->add_pagamento($pagamento);
+        }
+    
+        return $pedidos;
+      }
   }
 
 }
