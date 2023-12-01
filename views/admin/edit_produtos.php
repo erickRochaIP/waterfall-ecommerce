@@ -46,7 +46,7 @@
                                 <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">Editar</button>
                                 <input type="hidden" name="class" value="produto" />
                                 <input type="hidden" name="action" value="edit_produto" />
-                                <input type="hidden" name="id_produto" value= <?php echo $produto->get_id_produto() ?> />
+                                <input type="hidden" name="id_produto" value= "<?php echo $produto->get_id_produto() ?>"/>
                             </div>
                         </div>
                     </form>
@@ -56,7 +56,7 @@
                         <button type="submit" class="btn btn-outline-danger" style="margin-top: 10px;">Deletar</button>
                         <input type="hidden" name="class" value="Produto"/>
                         <input type="hidden" name="action" value="delete_produto"/>
-                        <input type="hidden" name="id_produto" value= <?php echo $produto->get_id_produto() ?> />
+                        <input type="hidden" name="id_produto" value= "<?php echo $produto->get_id_produto() ?>" />
                     </form>
                 </div>
         </div>

@@ -69,13 +69,18 @@ class Produto {
 class Informacao {
 	private $titulo;
     private $corpo;
+    private $id_produto;
 
-    public function get_titulo(){
-        return $this->titulo;
+    public function get_id_produto(){
+        return $this->id_produto;
     }
 
     public function get_corpo(){
         return $this->corpo;
+    }
+
+    public function get_titulo(){
+        return $this->titulo;
     }
 
     public function set_titulo($titulo){
@@ -84,6 +89,9 @@ class Informacao {
 
     public function set_corpo($corpo){
         $this->corpo = $corpo;
+    }
+    public function set_id_produto($id_produto){
+        $this->id_produto = $id_produto;
     }
 }
 
@@ -160,6 +168,49 @@ class ProdutoRepository extends Repository{
         return $produtos;
     }
 
+    public function get_all_informacoes_admin(){
+        $sql = 'SELECT ID_PRODUTO, TITULO, CORPO 
+        FROM INFORMACAO';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$stmt->execute();
+
+        $id_produto = -1;
+
+		$informacoes = array();
+		while ($row = $stmt->fetch()){
+            
+                $id_produto = $row['ID_PRODUTO'];
+
+                $informacao = new Informacao();
+            
+                $informacao->set_id_produto($row['ID_PRODUTO']);
+                $informacao->set_titulo($row['TITULO']);
+                $informacao->set_corpo($row['CORPO']);
+                $informacoes[] = $informacao;
+            
+        
+            
+        }
+        return $informacoes;
+    }
+
+
+    public function update_informacao($id_produto,$titulo,$corpo){
+        $sql = 'UPDATE INFORMACAO SET CORPO = ? WHERE ID_PRODUTO = ? AND TITULO = ?';
+        echo $id_produto; 
+        echo $titulo;
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute([$corpo,$id_produto,$titulo]);
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao mudar o corpo da informação');
+		}
+    }
+
+
     public function update_peco($preco, $id_produto){
         $sql = 'UPDATE PRODUTO SET PRECO = ? WHERE ID_PRODUTO = ?';
 
@@ -171,7 +222,32 @@ class ProdutoRepository extends Repository{
 			throw new Exception('Problemas ao mudar o nome');
 		}
     }
+ 
 
+    public function delete_informacao($id_produto,$titulo){
+        $sql = 'DELETE FROM INFORMACAO WHERE ID_PRODUTO = ? AND TITULO = ?';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute([$id_produto,$titulo]);
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao deletar a informação');
+		}
+    }
+
+    public function create_informacao($id_produto,$titulo,$corpo){
+        $sql = 'INSERT INTO INFORMACAO(ID_PRODUTO,TITULO,CORPO)
+        VALUES (?, ?, ?)';
+
+        $stmt = $this->conec->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $funcionou = $stmt->execute([$id_produto,$titulo,$corpo]);
+
+        if (!$funcionou){
+            throw new Exception('Problemas ao adicionar uma informação');
+        }
+    }
 
     public function delete_produto($id_produto){
         $sql = 'DELETE FROM PRODUTO WHERE ID_PRODUTO = ?';

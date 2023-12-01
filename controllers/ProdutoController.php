@@ -20,6 +20,13 @@ class ProdutoController extends Controller{
 
 	}
 
+	public function get_all_informacoes_admin($post){
+		$produtoRepo = new ProdutoRepository();
+		$_REQUEST['informacoes'] = $produtoRepo->get_all_informacoes_admin();
+		$this->load_view('admin/edit_informacao.php');
+
+	}
+
 	public function edit_produto($post){
 		$produtoRepo = new ProdutoRepository();
 		$preco = $post['preco'];
@@ -68,6 +75,60 @@ class ProdutoController extends Controller{
 		}
 
 		$this->load_controller('ProdutoController', 'get_all_produtos_admin', $post);
+	}
+
+
+	public function create_informacao($post){
+		$produtoRepo = new ProdutoRepository();
+		$id = $post['id_produto'];
+		$titulo = $post['titulo'];
+		$corpo = $post['corpo'];
+		
+
+		try{
+			$produtoRepo->create_informacao($id, $titulo, $corpo);
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('ProdutoController', 'get_all_informacoes_admin', $post);
+	}
+
+	public function delete_informacao($post){
+		$produtoRepo = new ProdutoRepository();
+		$id = $post['id_produto'];
+		$titulo = $post['titulo'];
+
+		try{
+			$produtoRepo->delete_informacao($id,$titulo);
+
+			$this->show_success('Informação deletado com sucesso!');
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('ProdutoController', 'get_all_informacoes_admin', $post);
+	}
+
+
+	public function edit_informacao($post){
+		$produtoRepo = new ProdutoRepository();
+		$corpo = $post['corpo'];
+		$id = $post['id_produto'];
+		$titulo = $post['titulo'];
+
+		try{
+			$produtoRepo->update_informacao($id,$titulo,$corpo);
+
+			$this->show_success('Preço atualizado com sucesso!');
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('ProdutoController', 'get_all_informacoes_admin', $post);
 	}
 
 

@@ -37,8 +37,8 @@
         <form action="index.php" method="post">
             <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Informação </a>
 
-            <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="open_carrinho"/>
+            <input type="hidden" name="class" value="Produto"/> 
+            <input type="hidden" name="action" value="get_all_informacoes_admin"/>
         </form>
         </li>
 

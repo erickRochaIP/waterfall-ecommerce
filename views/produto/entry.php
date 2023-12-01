@@ -34,7 +34,7 @@
             
             <input type="hidden" name="class" value="Pedido"/> 
             <input type="hidden" name ="action" value="add"/>
-            <input type="hidden" name="idProduto" value= <?php echo $produto->get_id_produto() ?> />
+            <input type="hidden" name="idProduto" value= "<?php echo $produto->get_id_produto() ?>" />
             </form>
     
     </div>
