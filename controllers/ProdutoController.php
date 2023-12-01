@@ -37,6 +37,23 @@ class ProdutoController extends Controller{
 		$this->load_controller('ProdutoController', 'get_all_produtos_admin', $post);
 	}
 
+	public function delete_produto($post){
+		$produtoRepo = new ProdutoRepository();
+		$id = $post['id_produto'];
+
+		try{
+			$produtoRepo->delete_produto($id);
+
+			$this->show_success('Produto deletado com sucesso!');
+		}
+		catch (Exception $e){
+			$this->show_error($e->getMessage());
+		}
+
+		$this->load_controller('ProdutoController', 'get_all_produtos_admin', $post);
+
+	}
+
 
 }
 ?>

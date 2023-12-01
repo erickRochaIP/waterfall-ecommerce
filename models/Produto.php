@@ -171,6 +171,19 @@ class ProdutoRepository extends Repository{
 			throw new Exception('Problemas ao mudar o nome');
 		}
     }
+
+
+    public function delete_produto($id_produto){
+        $sql = 'DELETE FROM PRODUTO WHERE ID_PRODUTO = ?';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute([$id_produto]);
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao deletar o produto');
+		}
+    }
     
 }
 
