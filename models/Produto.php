@@ -46,7 +46,7 @@ class Produto {
     }
 
     public function set_nome_categoria($categoria){
-        $this->categoria = $categoria;
+        $this->nome_categoria = $categoria;
     }
 
     public function set_descricao($descricao){
@@ -184,6 +184,7 @@ class ProdutoRepository extends Repository{
 			throw new Exception('Problemas ao deletar o produto');
 		}
     }
+
     
 }
 
