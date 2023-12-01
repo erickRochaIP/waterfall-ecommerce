@@ -95,6 +95,7 @@ class UsuarioController extends Controller{
 			$log = $this->get_session_login();
 
 			$usuarioRepo->delete_user($log);
+			$this->show_success('Usuario deletado com sucesso!');
 			$this->load_controller('UsuarioController', 'logout', $post);
 
 		}
