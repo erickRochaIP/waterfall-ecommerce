@@ -116,10 +116,6 @@ class PedidoController extends Controller{
             $this->show_error($e->getMessage());
 
         }
-
-
-    }
-
-    
+    } 
 }
 ?>

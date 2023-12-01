@@ -35,7 +35,7 @@
         
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit informação </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Informação </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
             <input type="hidden" name="action" value="open_carrinho"/>
@@ -47,52 +47,34 @@
             <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">edit Pedidos </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="open_pedidos"/>
+            <input type="hidden" name="action" value="edit_Pedidos"/>
         </form>
         </li>
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Itens pedidos </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Categorias </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="open_pedidos"/>
+            <input type="hidden" name="action" value="edit_categoria"/>
         </form>
         </li>
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit categorias </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Pagamento </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="open_pedidos"/>
+            <input type="hidden" name="action" value="edit_pagamento"/>
         </form>
         </li>
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit pagamento </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Produto </a>
 
-            <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="open_pedidos"/>
-        </form>
-        </li>
-
-        <li class="nav-item active">
-        <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit produto </a>
-
-            <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="open_pedidos"/>
-        </form>
-        </li>
-
-        <li class="nav-item active">
-        <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit usuario </a>
-
-            <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="open_pedidos"/>
+            <input type="hidden" name="class" value="Produto"/> 
+            <input type="hidden" name="action" value="get_all_produtos_admin"/>
         </form>
         </li>
 

@@ -128,6 +128,52 @@ class ProdutoRepository extends Repository{
 
 		return $produtos;
 	}
+    
+    public function get_all_produtos_admin(){
+        $sql = 'SELECT ID_PRODUTO, NOME, DESCRICAO, PRECO, 
+        NOME_CATEGORIA FROM PRODUTO';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$stmt->execute();
+
+        $id_produto = -1;
+
+		$produtos = array();
+		while ($row = $stmt->fetch()){
+            if ($row['ID_PRODUTO'] != $id_produto){
+                $id_produto = $row['ID_PRODUTO'];
+
+                $produto = new Produto();
+            
+                $produto->set_id_produto($row['ID_PRODUTO']);
+                $produto->set_nome($row['NOME']);
+                $produto->set_descricao($row['DESCRICAO']);
+                $produto->set_preco($row['PRECO']);
+                $produto->set_nome_categoria($row['NOME_CATEGORIA']);
+
+                $produtos[] = $produto;
+            }
+            
+            
+        }
+        return $produtos;
+    }
+
+    public function update_peco($preco, $id_produto){
+        $sql = 'UPDATE PRODUTO SET PRECO = ? WHERE ID_PRODUTO = ?';
+
+		$stmt = $this->conec->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$funcionou = $stmt->execute([$preco, $id_produto]);
+
+		if (!$funcionou){
+			throw new Exception('Problemas ao mudar o nome');
+		}
+    }
+    
 }
+
+
 
 ?>
