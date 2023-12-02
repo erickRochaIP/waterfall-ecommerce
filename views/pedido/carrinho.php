@@ -24,7 +24,7 @@
                 <form action="index.php" method="post">
                     <div class="row">
                         <div class="col-md-8">              
-                            <input type="number" name="quantidade" min="0" max="10">
+                            <input type="number" name="quantidade" min="0" max="10" value="<?php echo $item_pedido->get_quantidade() ?>">
                         </div>
 
                         <div class="col-md-4"> 
@@ -51,14 +51,14 @@
     <?php endforeach; ?>
 
     <form action="index.php" method="post">
-        <button> comprar </button>
+        <button type="submit" class="btn btn-outline-success" style="margin-top: 10px;">Comprar</button>
 
         <input type="hidden" name="class" value="Pedido"/> 
         <input type="hidden" name ="action" value="new_compra"/>
     </form>
 
     <form action="index.php" method="post">
-        <button> excluir carrinho </button>
+        <button type="submit" class="btn btn-outline-danger" style="margin-top: 10px;">Excluir carrinho</button>
 
         <input type="hidden" name="class" value="Pedido"/> 
         <input type="hidden" name ="action" value="exclude_carrinho"/>

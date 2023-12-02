@@ -1,13 +1,13 @@
 <form class="row g-3" action="index.php" method="post">
 <div class="row g-3">
-    <label for="login" class="col-sm-2 col-form-label">compras maiores que: </label>
+    <label for="login" class="col-sm-2 col-form-label">Compras maiores que: </label>
     <label class="visually-hidden" for="login">valor</label>
     <input type="text" class="form-control" name="filtro" placeholder="Filtro">
   </div>
 
 
   <div class="col-md-6">
-    <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">select</button>
+    <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">Filtrar</button>
   </div>
     <input type="hidden" name="class" value="Pedido"/> 
     <input type="hidden" name="action" value="open_pedidos"/>
@@ -18,17 +18,24 @@
     <?php foreach ($_REQUEST['pedidos'] as $pedido): ?>
     <div>
     <hr>
-        <?php echo $pedido->get_id() ?>
-        <?php echo $pedido->get_status() ?>
+        <div class="row">
+            <div class="col-md-2">
+                ID pedido: <?php echo $pedido->get_id() ?>
+            </div>
+        </div>
         
-        <table>
         <?php foreach ($pedido->get_pagamentos() as $pagamento): ?>
-            <tr>
-                <td><?php echo $pagamento->get_codigo() ?></td>
-                <td><?php echo $pagamento->get_endereco() ?></td>
-                <td><?php echo $pagamento->get_tipo() ?></td>
-                <td><?php echo $pagamento->get_total() ?></td>
-            </tr>
+            <div class="row">
+                <div class="col-md-1">
+                    <?php echo $pagamento->get_tipo() ?>
+                </div>
+                <div class="col-md-1">
+                    <?php echo $pagamento->get_total() ?>
+                </div>
+                <div class="col-md-2">
+                    <?php echo $pagamento->get_endereco() ?>
+                </div>
+            </div>
         <?php endforeach; ?>
         </table>
     

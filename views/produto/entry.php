@@ -29,7 +29,7 @@
         
         <form action="index.php" method="post">
             <input type="number" name="quantidade" min="0" max="10">
-            <button> adicionar ao carrinho </button>
+            <button type="submit" class="btn btn-outline-success" style="margin-top: 10px;">Adicionar ao Carrinho</button>
             
             
             <input type="hidden" name="class" value="Pedido"/> 

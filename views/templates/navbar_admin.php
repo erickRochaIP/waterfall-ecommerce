@@ -11,14 +11,49 @@
         <li class="nav-item active">
         <form action="index.php" method="post">
             <!-- Esse atributo "onclick" faz com que o formulario seja enviado ao clicar -->
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Products</a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Ver Produtos</a>
 
             <!-- Sempre identificar a controller e a acao -->
             <input type="hidden" name="class" value="Produto"/> 
             <input type="hidden" name="action" value="get_all_produtos"/>
         </form>
+        </li>     
+        
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Informação</a>
+
+            <input type="hidden" name="class" value="Produto"/> 
+            <input type="hidden" name="action" value="get_all_informacoes_admin"/>
+        </form>
         </li>
 
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Categoria</a>
+
+            <input type="hidden" name="class" value="Categoria"/> 
+            <input type="hidden" name="action" value="get_all_categorias"/>
+        </form>
+        </li>
+
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Pagamento</a>
+
+            <input type="hidden" name="class" value="Pedido"/> 
+            <input type="hidden" name="action" value="get_all_pagamentos_admin"/>
+        </form>
+        </li>
+
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Produto</a>
+
+            <input type="hidden" name="class" value="Produto"/> 
+            <input type="hidden" name="action" value="get_all_produtos_admin"/>
+        </form>
+        </li>
 
         <?php if (isset($_SESSION['usuario'])): ?>
 
@@ -31,45 +66,10 @@
         </form>
         </li>
 
-        <?php endif; ?>      
-        
-        <li class="nav-item active">
-        <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Informação </a>
-
-            <input type="hidden" name="class" value="Produto"/> 
-            <input type="hidden" name="action" value="get_all_informacoes_admin"/>
-        </form>
-        </li>
-
-        <li class="nav-item active">
-        <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Categorias </a>
-
-            <input type="hidden" name="class" value="Categoria"/> 
-            <input type="hidden" name="action" value="get_all_categorias"/>
-        </form>
-        </li>
-
-        <li class="nav-item active">
-        <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Pagamento </a>
-
-            <input type="hidden" name="class" value="Pedido"/> 
-            <input type="hidden" name="action" value="get_all_pagamentos_admin"/>
-        </form>
-        </li>
-
-        <li class="nav-item active">
-        <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> edit Produto </a>
-
-            <input type="hidden" name="class" value="Produto"/> 
-            <input type="hidden" name="action" value="get_all_produtos_admin"/>
-        </form>
-        </li>
+        <?php endif; ?> 
 
     </ul>
+    </div>
     <?php if (isset($_SESSION['usuario'])): ?>
 
         <span class="navbar-text">
@@ -78,7 +78,4 @@
         </span>
 
     <?php endif; ?>
-
-    
-  </div>
 </nav>

@@ -11,7 +11,7 @@
         <li class="nav-item active">
         <form action="index.php" method="post">
             <!-- Esse atributo "onclick" faz com que o formulario seja enviado ao clicar -->
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Products</a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Ver Produtos</a>
 
             <!-- Sempre identificar a controller e a acao -->
             <input type="hidden" name="class" value="Produto"/> 
@@ -19,9 +19,8 @@
         </form>
         </li>
 
-
         <li class="nav-item active">
-            <a class="nav-link" href="">Categories</a>
+            <a class="nav-link" href="">About</a>
         </li>
 
         <?php if (isset($_SESSION['usuario']) == false): ?>
@@ -47,23 +46,8 @@
 
         <?php endif; ?>
 
-        <li class="nav-item active">
-            <a class="nav-link" href="">About</a>
-        </li>
-
 
         <?php if (isset($_SESSION['usuario'])): ?>
-
-        <li class="nav-item active">
-        <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Logout</a>
-
-            <input type="hidden" name="class" value="Usuario"/> 
-            <input type="hidden" name="action" value="logout"/>
-        </form>
-        </li>
-
-        <?php endif; ?>
         
         <li class="nav-item active">
         <form action="index.php" method="post">
@@ -92,7 +76,17 @@
         </form>
         </li>
 
+        <li class="nav-item active">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Logout</a>
+
+            <input type="hidden" name="class" value="Usuario"/> 
+            <input type="hidden" name="action" value="logout"/>
+        </form>
+        </li>
+        <?php endif; ?>
     </ul>
+    </div>
     <?php if (isset($_SESSION['usuario'])): ?>
 
         <span class="navbar-text">
@@ -101,7 +95,4 @@
         </span>
 
     <?php endif; ?>
-
-    
-  </div>
 </nav>
