@@ -1,7 +1,7 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-primary">
-    <a class="navbar-brand" href="">
-        <img src="pictures/waterfall.png" width="30" height="30" class="d-inline-block align-top" alt="Icon waterfall">
-            Waterfall e-commerce
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark"> 
+<a class="navbar-brand" href="#">
+      <img src="pictures/waterfall.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      Waterfall E-commerce
     </a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -51,7 +51,10 @@
         
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Carrinho </a>
+            
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">
+            <img src="css/add-to-cart.png" width="30" height="30" class="d-inline-block align-top" alt="Icon waterfall">
+            Carrinho </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
             <input type="hidden" name="action" value="open_carrinho"/>

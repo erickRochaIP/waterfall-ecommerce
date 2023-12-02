@@ -69,7 +69,6 @@ class ProdutoController extends Controller{
 
 		try{
 			$id = $produtoRepo->create_produto($nome, $categoria, $descricao, $preco);
-
 			if (isset($_FILES['img'])){
 				$info = pathinfo($_FILES['img']['name']);
 				$ext = $info['extension'];

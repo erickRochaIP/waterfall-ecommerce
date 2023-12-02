@@ -1,4 +1,4 @@
-<form action="index.php" method="post">
+<form action="index.php" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-2">
             <input type="text" class="form-control" name="nome" placeholder="Nome">
@@ -13,7 +13,7 @@
             <input type="text" class="form-control" name="preco" placeholder="Preço">
         </div>
         <div class="col-md-2">
-            <input type="file" class="form-control" name="img">
+            <input type="file" class="form-control" name="img" id="img" accept="image/*">
         </div>
         
         <div class="col-md-2">

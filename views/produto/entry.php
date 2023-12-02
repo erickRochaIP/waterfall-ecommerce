@@ -49,7 +49,7 @@
 
                 <div class="col-md-6">
                  <?php $id_imagem =  $produto->get_id_produto();?>
-                    <img src="pictures\<?php echo $id_imagem;?>.png" class="img-fluid" alt="Imagem do Produto" style="max-width: 400px;">
+                    <img src="pictures\<?php echo $id_imagem;?>.png" class="img-fluid" alt="Imagem do Produto" style="max-width: 350px;">
                     <form action="index.php" method="post">
                         <input type="number" name="quantidade" min="0" max="10">
                         <button type="submit" class="btn btn-outline-success" style="margin-top: 10px;">Adicionar ao Carrinho</button>
@@ -61,19 +61,19 @@
             </div>
 
             <div class="accordion accordion-flush" style="max-width: 300px;">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Descrição
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body"> <strong> <?php echo $produto->get_descricao() ?> </strong> </div>
-                    </div>
-                </div>
+        <div class="accordion-item">
+            <?php $id_accordion =  "id".$produto->get_id_produto();?>
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $id_accordion;?>" aria-expanded="false" aria-controls="<?php echo $id_accordion;?>">
+                    Descrição
+                </button>
+            </h2>
+            
+            <div id="<?php echo $id_accordion;?>" class="accordion-collapse collapse" data-bs-parent=".accordion-flush">
+                <div class="accordion-body"> <strong> <?php echo $produto->get_descricao() ?> </strong> </div>
             </div>
         </div>
+    </div>
     <?php endforeach; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
