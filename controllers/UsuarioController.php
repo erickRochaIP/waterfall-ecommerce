@@ -65,6 +65,10 @@ class UsuarioController extends Controller{
 		$this->load_view('usuario/perfil.php');
 	}
 
+	public function about($post){
+		$this->load_view('usuario/about.php');
+	}
+
 	public function update_name($post){
 		$usuarioRepo = new UsuarioRepository();
 		$nome = $post['nome'];

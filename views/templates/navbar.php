@@ -23,16 +23,20 @@
         </li>
 
         <li class="nav-item active">
-            <a class="nav-link" href="" style="color: rgb(255, 255, 255);">
+        <form action="index.php" method="post">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;" style="color: rgb(255, 255, 255);">
             <img src="css/id-card.png" width="30" height="30" class="d-inline-block align-top" alt="Icon logado">
             <strong>About</strong></a>
+            <input type="hidden" name="class" value="Usuario"/> 
+            <input type="hidden" name="action" value="about"/>
+        </form>
         </li>
 
         <?php if (isset($_SESSION['usuario']) == false): ?>
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false; "style="color: rgb(255, 255, 255);">
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;" style="color: rgb(255, 255, 255);">
             <strong>Login </strong>
             <img src="css/permission.png" width="30" height="30" class="d-inline-block align-top" alt="Icon logado">
           </a>

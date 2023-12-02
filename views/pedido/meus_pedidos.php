@@ -1,8 +1,8 @@
 <form class="row g-3" action="index.php" method="post">
 <div class="row g-3">
-    <label for="login" class="col-sm-2 col-form-label">Compras maiores que: </label>
+    <label for="login" class="form-control"><strong>Compras maiores que: </strong></label>
     <label class="visually-hidden" for="login">valor</label>
-    <input type="text" class="form-control" name="filtro" placeholder="Filtro">
+    <input type="text" class="form-control" name="filtro" placeholder="Filtro" style="width: 300px; min-width: 300px;">
   </div>
 
 
