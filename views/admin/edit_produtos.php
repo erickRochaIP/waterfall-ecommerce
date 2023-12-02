@@ -6,11 +6,14 @@
         <div class="col-md-2">
             <input type="text" class="form-control" name="categoria" placeholder="Categoria">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <input type="text" class="form-control" name="descricao" placeholder="Descrição">
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
             <input type="text" class="form-control" name="preco" placeholder="Preço">
+        </div>
+        <div class="col-md-2">
+            <input type="file" class="form-control" name="img">
         </div>
         
         <div class="col-md-2">
