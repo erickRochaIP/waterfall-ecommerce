@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark"> 
-<a class="navbar-brand" href="#">
-      <img src="pictures/waterfall.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      Waterfall E-commerce
+<a class="navbar-brand" href="#" style="color: rgb(255, 255, 255);">
+      <img src="pictures/waterfall.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+     <strong> Waterfall E-commerce </strong>
     </a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -11,7 +11,10 @@
         <li class="nav-item active">
         <form action="index.php" method="post">
             <!-- Esse atributo "onclick" faz com que o formulario seja enviado ao clicar -->
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Ver Produtos</a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;" style="color: rgb(255, 255, 255);">
+            <img src="css/shopping.png" width="30" height="30" class="d-inline-block align-top" alt="Icon logado">          
+            <strong> Produtos </strong>
+           </a>
 
             <!-- Sempre identificar a controller e a acao -->
             <input type="hidden" name="class" value="Produto"/> 
@@ -20,14 +23,19 @@
         </li>
 
         <li class="nav-item active">
-            <a class="nav-link" href="">About</a>
+            <a class="nav-link" href="" style="color: rgb(255, 255, 255);">
+            <img src="css/id-card.png" width="30" height="30" class="d-inline-block align-top" alt="Icon logado">
+            <strong>About</strong></a>
         </li>
 
         <?php if (isset($_SESSION['usuario']) == false): ?>
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Login </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false; "style="color: rgb(255, 255, 255);">
+            <strong>Login </strong>
+            <img src="css/permission.png" width="30" height="30" class="d-inline-block align-top" alt="Icon logado">
+          </a>
 
             <input type="hidden" name="class" value="Usuario"/>
             <input type="hidden" name="action" value="open_login"/>
@@ -37,7 +45,9 @@
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Sign Up </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;" style="color: rgb(255, 255, 255);">
+            <strong>Sign Up </strong>
+         </a>
 
             <input type="hidden" name="class" value="Usuario"/> 
             <input type="hidden" name="action" value="open_sign_up"/>
@@ -52,9 +62,10 @@
         <li class="nav-item active">
         <form action="index.php" method="post">
             
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">
-            <img src="css/add-to-cart.png" width="30" height="30" class="d-inline-block align-top" alt="Icon waterfall">
-            Carrinho </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;" style="color: rgb(255, 255, 255);">
+            <img src="css/grocery-cart.png" width="30" height="30" class="d-inline-block align-top" alt="Icon carrinho" >
+            <strong>Carrinho </strong>
+            </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
             <input type="hidden" name="action" value="open_carrinho"/>
@@ -63,7 +74,10 @@
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Meus Pedidos </a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;" style="color: rgb(255, 255, 255);">
+            <img src="css/shop.png" width="30" height="30" class="d-inline-block align-top" alt="Icon pedidos">
+            <strong>Pedidos </strong>
+         </a>
 
             <input type="hidden" name="class" value="Pedido"/> 
             <input type="hidden" name="action" value="open_pedidos"/>
@@ -72,8 +86,10 @@
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"> Perfil </a>
-
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;"style="color: rgb(255, 255, 255);" > 
+            <img src="css/man.png" width="30" height="30" class="d-inline-block align-top" alt="Icon perfil">
+            <strong>Perfil </strong></a>
+           
             <input type="hidden" name="class" value="Usuario"/> 
             <input type="hidden" name="action" value="perfil"/>
         </form>
@@ -81,7 +97,10 @@
 
         <li class="nav-item active">
         <form action="index.php" method="post">
-            <a class="nav-link" href="" onclick="this.closest('form').submit();return false;">Logout</a>
+            <a class="nav-link" href="" onclick="this.closest('form').submit();return false; "style="color: rgb(255, 255, 255);">
+            <img src="css/check-out.png" width="30" height="30" class="d-inline-block align-top" alt="Icon logado">
+            <strong>Logout</strong>
+         </a>
 
             <input type="hidden" name="class" value="Usuario"/> 
             <input type="hidden" name="action" value="logout"/>
@@ -91,8 +110,8 @@
     </ul>
     </div>
     <?php if (isset($_SESSION['usuario'])): ?>
-
-        <span class="navbar-text">
+        <img src="css/permission.png" width="30" height="30" class="d-inline-block align-top" alt="Icon logado">
+        <span class="navbar-text" style="color: rgb(255, 255, 255);">
             Usuario logado: 
             <?php echo $_SESSION['usuario'][1] ?>
         </span>
