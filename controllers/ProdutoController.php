@@ -68,7 +68,20 @@ class ProdutoController extends Controller{
 		$preco = $post['preco'];
 
 		try{
-			$produtoRepo->create_produto($nome, $categoria, $descricao, $preco);
+			$id = $produtoRepo->create_produto($nome, $categoria, $descricao, $preco);
+
+			if (isset($_FILES['img'])){
+				$info = pathinfo($_FILES['img']['name']);
+				$ext = $info['extension'];
+				if ($ext == "png"){
+					$newname = $id.'.'.$ext;
+	
+					$target = __DIR__.'/../pictures/'.$newname;
+					move_uploaded_file($_FILES['img']['tmp_name'], $target);
+				}
+				
+			}
+
 		}
 		catch (Exception $e){
 			$this->show_error($e->getMessage());

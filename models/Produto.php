@@ -272,6 +272,8 @@ class ProdutoRepository extends Repository{
         if (!$funcionou){
             throw new Exception('Problemas ao adicionar produto');
         }
+
+        return $this->conec->lastInsertId();
     }
 
     
